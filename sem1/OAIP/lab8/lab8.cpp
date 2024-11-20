@@ -24,4 +24,6 @@ int main(){
     cout << "Enter n: ";    cin >> n;
     cout << "Result of recursive func: " << my_rec_func(n) << endl;
     cout << "Result of defoult func:   " << my_func(n) << endl;
+
+    return 0;
 }
