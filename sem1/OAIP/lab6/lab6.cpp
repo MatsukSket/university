@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    char *str = new char[100];а
+    char *str = new char[100];
     cout << "Введите строку: ";
     cin.getline(str, 100);
     for (int i = 0; str[i] != '\0'; i++){
