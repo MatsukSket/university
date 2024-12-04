@@ -1,33 +1,29 @@
 #include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-char encd(char c){
+char encd(char c) {
     if ('a' <= c && c <= 'z')
-        return (c == 'a') ? 'z' : c + 1;
+        return ((c == 'a') ? ('z') : (c - 1));
     if ('A' <= c && c <= 'Z')
-        return (c == 'A') ? 'Z' : c + 1;
+        return ((c == 'A') ? ('Z') : (c - 1));
+    return c; 
 }
 
 int main()
 {
-    FILE *myFile;
-    if (!(myFile = fopen("test.txt", "rt"))){
-        puts("\nОшибка открытия файла");
-        return 0;
-    }
-    FILE *ans = fopen("ans.txt", "wt");
-    if (ans == nullptr) {
-        puts("ошибка открытия файла");
-        return 0;
-    }
+    FILE* f = fopen("input.txt", "r");
+    char* str = new char[99];
+    fscanf(f, "%[^\n]", str);
+    fclose(f);
 
-    char *str = new char[99];
-    fscanf(myFile, "%s", str);
-
-    
-    
-    
-    fclose(myFile);
+    FILE* ans = fopen("output.txt", "w");
+    for (int i = 0; str[i] != '\0'; i++) {
+        fprintf(ans, "%c", encd(str[i]));
+    }
     fclose(ans);
+
+    delete[] str;
+    return 0;
 }
