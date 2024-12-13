@@ -10,7 +10,13 @@
 
 using namespace std;
 
-void output(vector<vector<int>>& ans, int n) {
+void input(int& n, vector<vector<int>>& vec)
+{
+
+}
+
+void output(vector<vector<int>>& ans, int n) 
+{
     cout << "  ";
     for (int i = 0; i < n; i++)
         cout << setw(3) << i;
@@ -54,8 +60,6 @@ void bfs(vector<vector<int>>& graph)
             }
         }
     }
-
-    output(ans, n);
 }
 
 int main() {
@@ -64,15 +68,17 @@ int main() {
     int n = 7;
     vector<vector<int>> graph(n, vector<int>(n, 0));
 
+
+    
     // неориентриванный
     //           0  1  2  3  4  5  6 
-    graph[0] = { 0, 5, 3, 0, 0, 0, 0 };
+    /*graph[0] = { 0, 5, 3, 0, 0, 0, 0 };
     graph[1] = { 5, 0, 2, 6, 0, 0, 0 };
     graph[2] = { 3, 2, 0, 0, 4, 0, 0 };
     graph[3] = { 0, 6, 0, 0, 1, 2, 0 };
     graph[4] = { 0, 0, 4, 1, 0, 1, 7 };
     graph[5] = { 0, 0, 0, 2, 1, 0, 3 };
-    graph[6] = { 0, 0, 0, 0, 7, 3, 0 };
+    graph[6] = { 0, 0, 0, 0, 7, 3, 0 };*/
 
     /*  ans      0  1  2  3  4  5  6
     graph[0] = { 0, 5, 3, 0, 0, 0, 0 };
@@ -86,15 +92,18 @@ int main() {
 
     // ориентированный 
     //           0  1  2  3  4  5  6 
-    /*graph[0] = { 0, 5, 3, 0, 0, 0, 0 };
+    graph[0] = { 0, 5, 3, 0, 0, 0, 0 };
     graph[1] = { 0, 0, 0, 6, 0, 0, 0 };
     graph[2] = { 0, 2, 0, 0, 4, 0, 0 };
     graph[3] = { 0, 0, 0, 0, 1, 2, 0 };
     graph[4] = { 0, 0, 0, 1, 0, 1, 7 };
     graph[5] = { 0, 0, 0, 0, 0, 0, 3 };
-    graph[6] = { 0, 0, 0, 0, 0, 0, 0 };*/
+    graph[6] = { 0, 0, 0, 0, 0, 0, 0 };
+    
+    vector<vector<int>> ans = graph;
+    bfs(ans);
+    output(ans, n);
 
-    bfs(graph);
 
     return 0;
 }

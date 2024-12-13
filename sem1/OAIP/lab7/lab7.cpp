@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <vector>
 #include <iomanip>
-#include <string>
+#include <cstring>
 
 using namespace std;
 struct Student
@@ -35,7 +35,7 @@ void readData(vector<Student>& vec)
 
     for (int i = 0; i < studCount; i++){
         Student stud;
-        char groupC[8], physC[2], mathC[2], infC[2], averageC[4]; 
+        char groupC[8], physC[3], mathC[3], infC[3], averageC[5]; 
         fscanf(journal,"%s%s%s%s%s%s", stud.name, groupC, physC, mathC, infC, averageC);
         stud.group = atoi(groupC);
         stud.phys = atoi(physC);
@@ -97,7 +97,11 @@ void editInfo(vector<Student>& vec, char name[])
     for (int i = 0; i < listLen; i++){
         bool findIt = true;
         char* listName = vec[i].name;
-        for (int i = 0; i < nameLen; i++) {
+        int studLen;
+        for (int i = 0; listName[i] != '\0'; i++)
+            studLen = i + 1;
+
+        for (int i = 0; i < nameLen || i < studLen; i++) {
             if(name[i] != listName[i] || name[i+1] != listName[i+1])
                 findIt = false;
         }
@@ -144,7 +148,7 @@ void sortByName(vector<Student>& vec)
     int studCount = vec.size();
     for (int i = 0; i < studCount - 1; i++)
         for (int j = 0; j < studCount - i - 1; j++)
-            if (vec[j].name > vec[j+1].name)
+            if (strcmp(vec[j].name, vec[j+1].name) > 0)
                 swap(vec[j], vec[j+1]);
 
 }
@@ -198,15 +202,15 @@ int main()
 {
     int studCount;
     vector<Student> studList;
-    enterData(studList, studCount);
-    writeData(studList);
+    // enterData(studList, studCount);
+    // writeData(studList);
 
     cout << "There are the list of operations:\n";
     cout << "1. Create a new list\n";
     cout << "2. View the list\n";
     cout << "3. Add a student\n";
     cout << "4. Complete an individual task\n";
-    cout << "5. Edit a student\n";
+    cout << "5. Edit a student !!!doesn't work!!!\n";
     cout << "6. Delete a student\n";
     cout << "7. Sort the list\n";
     cout << "0. Exit\n";
