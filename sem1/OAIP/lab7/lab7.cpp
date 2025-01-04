@@ -210,7 +210,7 @@ int main()
     cout << "2. View the list\n";
     cout << "3. Add a student\n";
     cout << "4. Complete an individual task\n";
-    cout << "5. Edit a student !!!doesn't work!!!\n";
+    cout << "5. Edit a student\n";
     cout << "6. Delete a student\n";
     cout << "7. Sort the list\n";
     cout << "0. Exit\n";
@@ -248,7 +248,7 @@ int main()
             findGoodInf(goodInf, studList);
             outputData(goodInf);
             break;
-        case 5: // edit student         !!!doesnt work!!!
+        case 5: // edit student
             studList.clear();
 
             cout << "There are all students:\n";
