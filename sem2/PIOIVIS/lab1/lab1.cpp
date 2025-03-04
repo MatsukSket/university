@@ -28,6 +28,7 @@ void printList()
         curr = curr->next;
     }
     printf("]");
+    
 }
 
 void insertFirst(int data)
