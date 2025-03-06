@@ -6,52 +6,67 @@ int getRandom(){
     return rand() % 199 - 99;
 }
 
-class Stack{
+class Queue{
 private:
     class Node{
     public:
         int data;
         Node *next = NULL;
+        Node *prev = NULL;
     };
     Node *head = NULL;
-    
+    Node *last = NULL;
+
 public:
-    bool isEmpty() {
+    bool isEmpty(){
         return head == NULL;
     }
 
-    int top(){
-        return head->data;
+    int front(){
+        return last->data;
     }
 
-    void push(int new_value) 
-    {
+    void push(int new_value){
         Node *new_node = new Node;
         new_node->data = new_value;
-        new_node->next = head;
-        head = new_node; 
+
+        if(isEmpty()){
+            head = new_node;
+            last = new_node;
+            return;
+        }
+        
+        head->next = new_node;
+        new_node->prev = head;
+        head = new_node;
     }
 
-    void pop()
-    {
-        if(!head){
-            std::cout << "Stack is empty\n";
+    void pop(){
+        if(isEmpty()){
+            std::cout << "Queue is empty\n";
             return;
         }
 
-        Node *temp = head;
-        head = head->next;
+        Node *temp = last;
+        last = last->next;
+        if(last)
+            last->prev = NULL;
+        else {
+            head->prev = NULL;
+            head = NULL;
+        }
+        
         delete temp;
-    }
+    }    
 
-    void print()
-    {
-        if(!head){
-            std::cout << "Stack is empty\n";
+    void print(){
+        if(isEmpty()){
+            std::cout << "Queue is empty\n";
             return;
         }
 
-        Node *curr = head;
+        Node *curr = new Node;
+        curr = last;
         while(curr){
             std::cout << curr->data << ' ';
             curr = curr->next;
@@ -62,59 +77,45 @@ public:
     Node *findMax()
     {
         Node *max_element = head;
-        Node *curr = head->next;
-        while(curr){
-            if (curr->data > max_element->data)
-                max_element = curr;
-            curr = curr->next;
-        }
+        Node *curr = head->prev;
         
+        while(curr){
+            if(curr->data > max_element->data)
+                max_element = curr;
+            curr = curr->prev;
+        }
+
         return max_element;
     }
 
-    void copyToMax(Stack &other)
-    {   
+    void copyToMax(Queue &other) 
+    {
         other.deleteAll();
-        Stack temp_stack;
-        Node *curr = head, *max_element = findMax();
+        Node *curr = findMax();
 
-        while(curr != max_element){
-            temp_stack.push(curr->data);
+        while(curr){
+            other.push(curr->data);
             curr = curr->next;
-        }
-        temp_stack.push(max_element->data);
-
-        while(!temp_stack.isEmpty()){
-            other.push(temp_stack.top());
-            temp_stack.pop();
         }
     }
 
-    void deleteAll()
-    {
-        while (head)
+    void deleteAll(){
+        while(last)
             pop();
     }
 
-    ~Stack(){
+    ~Queue(){
         deleteAll();
     }
 };
-
 int main()
 {
     srand(static_cast<unsigned int>(time(0))); 
 
     int whatToDo;
-    Stack myStack, taskStack;
+    Queue myQueue, taskQueue;
 
-    std::cout << "1 - Add\n";
-    std::cout << "2 - View one\n";
-    std::cout << "3 - View all\n";
-    std::cout << "4 - Delete one\n";
-    std::cout << "5 - Delete all\n";
-    std::cout << "6 - Task\n";
-    std::cout << "0 - Exit\n";
+    std::cout << "1 - Add\n2 - View one\n3 - View all\n4 - Delete one\n5 - Delete all\n6 - Task\n0 - Exit\n";
 
     bool stop = false;
     while(!stop){
@@ -125,46 +126,44 @@ int main()
         {
         // push
         case 1:
-            myStack.push(getRandom());
+            myQueue.push(getRandom());
             break;
 
-        // view top
+        // view one
         case 2:
-            if(myStack.isEmpty()){
-                std::cout << "Stack is empty\n";
+            if(myQueue.isEmpty()){
+                std::cout << "Queue is empty\n";
                 break;
             }
 
-            std::cout << myStack.top() << '\n';
+            std::cout << myQueue.front() << '\n';
             break;
-
+        
         // view all
         case 3:
-            myStack.print();
+            myQueue.print();
             break;
 
         // delete one
         case 4:
-            myStack.pop();
+            myQueue.pop();
             break;
 
-        //delete all
+        // delete all
         case 5:
-            myStack.deleteAll();
+            myQueue.deleteAll();
             break;
 
         // complete task
         case 6:
-            if(myStack.isEmpty()){
+            if(myQueue.isEmpty()){
                 std::cout << "Stack is empty\n";
                 break;
             }
 
-            myStack.copyToMax(taskStack);
-            taskStack.print();
+            myQueue.copyToMax(taskQueue);
+            taskQueue.print();
             break;
-        
-        // exit program
         case 0:
             stop = true;
             break;
