@@ -6,7 +6,7 @@ int getRandom(){
     return rand() % 199 - 99;
 }
 
-class Queue{
+class List{
 private:
     class Node{
     public:
@@ -88,7 +88,7 @@ public:
         return max_element;
     }
 
-    void copyToMax(Queue &other) 
+    void copyToMax(List &other) 
     {
         other.deleteAll();
         Node *curr = findMax();
@@ -104,7 +104,7 @@ public:
             pop();
     }
 
-    ~Queue(){
+    ~List(){
         deleteAll();
     }
 };
@@ -113,7 +113,7 @@ int main()
     srand(static_cast<unsigned int>(time(0))); 
 
     int whatToDo;
-    Queue myQueue, taskQueue;
+    List myQueue, taskQueue;
 
     std::cout << "1 - Add\n2 - View one\n3 - View all\n4 - Delete one\n5 - Delete all\n6 - Task\n0 - Exit\n";
 
