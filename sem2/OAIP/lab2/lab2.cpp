@@ -3,7 +3,7 @@
 #include <cstdlib>
 
 int getRandom(){
-    return rand() % 199 - 99;
+    return rand() % 10;
 }
 
 class Stack{
@@ -90,6 +90,43 @@ public:
         }
     }
 
+    void def(){
+        int counter = 0;
+        Node *new_node = new Node;
+        new_node->next = head;
+        Node *curr = new_node;
+        while(curr->next){
+            counter++;
+
+            if(counter == 3){
+                if(curr->next == head)
+                    head = head->next;
+
+                Node *temp = curr->next;
+                curr->next = curr->next->next;
+                
+                counter = 0;
+                delete temp;
+                continue;
+            }
+
+            if(curr->next->data % 2 == 0){
+                if(curr->next == head)
+                    head = head->next;
+
+                Node *temp = curr->next;
+                curr->next = curr->next->next;
+
+                if(counter <= 2)
+                    counter++;
+                delete temp;
+                continue;
+            }
+            curr = curr->next;
+        }
+        delete new_node;
+    }
+
     void deleteAll()
     {
         while (head)
@@ -108,13 +145,14 @@ int main()
     int whatToDo;
     Stack myStack, taskStack;
 
-    std::cout << "1 - Add\n";
-    std::cout << "2 - View one\n";
-    std::cout << "3 - View all\n";
-    std::cout << "4 - Delete one\n";
-    std::cout << "5 - Delete all\n";
-    std::cout << "6 - Task\n";
-    std::cout << "0 - Exit\n";
+    std::cout << "1 - Add\n"
+                 "2 - View one\n"
+                 "3 - View all\n"
+                 "4 - Delete one\n"
+                 "5 - Delete all\n"
+                 "6 - Task\n"
+                 "7 - Def\n"
+                 "0 - Exit\n";
 
     bool stop = false;
     while(!stop){
@@ -162,6 +200,15 @@ int main()
 
             myStack.copyToMax(taskStack);
             taskStack.print();
+            break;
+        case 7:
+            if(myStack.isEmpty()){
+                std::cout << "Stack is empty\n";
+                break;
+            }
+
+            myStack.def();
+            myStack.print();
             break;
         
         // exit program

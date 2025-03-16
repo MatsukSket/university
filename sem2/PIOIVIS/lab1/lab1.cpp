@@ -1,7 +1,6 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-#include <stack>
 
 int getRandom(){
     return rand() % 10 + 1;
@@ -124,27 +123,35 @@ public:
     }
 
     void unification(List &first, List &second)
-    {   
+    {
+        deleteAll();
         first.sort();
         second.sort();
         Node *curr_first = first.head;
         Node *curr_second = second.head;
 
-        while(curr_first && curr_second){
-            if(curr_first->data == curr_second->data){
-                pushFront(curr_first->data);
+        while (curr_first && curr_second) {
+            if (curr_first->data < curr_second->data) {
+                pushLast(curr_first->data);
+                curr_first = curr_first->prev;
+            } else if (curr_first->data > curr_second->data) {
+                pushLast(curr_second->data);
+                curr_second = curr_second->prev;
+            } else {
+                pushLast(curr_first->data);
                 curr_first = curr_first->prev;
                 curr_second = curr_second->prev;
             }
-            else 
-                if(curr_first->data < curr_second->data){
-                    pushFront(curr_first->data);
-                    curr_first = curr_first->prev;
-                }
-                else{
-                    pushFront(curr_second->data);
-                    curr_second = curr_second->prev; 
-                }
+        }
+
+        while (curr_first) {
+            pushLast(curr_first->data);
+            curr_first = curr_first->prev;
+        }
+
+        while (curr_second) {
+            pushLast(curr_second->data);
+            curr_second = curr_second->prev;
         }
     }
     

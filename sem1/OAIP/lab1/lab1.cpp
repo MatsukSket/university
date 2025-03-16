@@ -20,5 +20,5 @@ int main()
     d = h * z + x * x;
 
     cout << "Результат: ";
-    cout << setprecision(4) << fixed << a - b * c / d;
+    cout << setprecision(4) << fixed << a - b * c / d << '\n';
 }

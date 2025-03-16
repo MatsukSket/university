@@ -26,7 +26,7 @@ public:
         return last->data;
     }
 
-    void push(int new_value){
+    void pushfront(int new_value){
         Node *new_node = new Node;
         new_node->data = new_value;
 
@@ -39,6 +39,21 @@ public:
         head->next = new_node;
         new_node->prev = head;
         head = new_node;
+    }
+
+    void pushback(int new_value){
+        Node *new_node = new Node;
+        new_node->data = new_value;
+
+        if(isEmpty()){
+            head = new_node;
+            last = new_node;
+            return;
+        }
+
+        last->prev = new_node;
+        new_node->next = last;
+        last = new_node;
     }
 
     void pop(){
@@ -59,19 +74,32 @@ public:
         delete temp;
     }    
 
-    void print(){
+    void printFront(){
         if(isEmpty()){
             std::cout << "Queue is empty\n";
             return;
         }
 
-        Node *curr = new Node;
-        curr = last;
+        Node *curr = last;
         while(curr){
             std::cout << curr->data << ' ';
             curr = curr->next;
         }
         std::cout << '\n';
+    }
+
+    void printBack(){
+        if(isEmpty()){
+            std::cout << "Queue is empty\n";
+            return;
+        }
+
+        Node *curr = head;
+        while(curr){
+            std::cout << curr->data << ' ';
+            curr = curr->prev;
+        }
+        std::cout << "\n";
     }
 
     Node *findMax()
@@ -94,7 +122,7 @@ public:
         Node *curr = findMax();
 
         while(curr){
-            other.push(curr->data);
+            other.pushfront(curr->data);
             curr = curr->next;
         }
     }
@@ -108,6 +136,7 @@ public:
         deleteAll();
     }
 };
+
 int main()
 {
     srand(static_cast<unsigned int>(time(0))); 
@@ -115,7 +144,14 @@ int main()
     int whatToDo;
     List myQueue, taskQueue;
 
-    std::cout << "1 - Add\n2 - View one\n3 - View all\n4 - Delete one\n5 - Delete all\n6 - Task\n0 - Exit\n";
+    std::cout << "1 - Add front\n"
+                 "2 - Add back\n"
+                 "3 - View front\n"
+                 "4 - View back\n"
+                 "5 - Delete one\n"
+                 "6 - Delete all\n"
+                 "7 - Task\n"
+                 "0 - Exit\n";
 
     bool stop = false;
     while(!stop){
@@ -126,43 +162,41 @@ int main()
         {
         // push
         case 1:
-            myQueue.push(getRandom());
+            myQueue.pushfront(getRandom());
+            myQueue.printFront();
             break;
-
-        // view one
         case 2:
-            if(myQueue.isEmpty()){
-                std::cout << "Queue is empty\n";
-                break;
-            }
-
-            std::cout << myQueue.front() << '\n';
+            myQueue.pushback(getRandom());
+            myQueue.printFront();
             break;
         
-        // view all
+        // view 
         case 3:
-            myQueue.print();
+            myQueue.printFront();
+            break;
+        case 4:
+            myQueue.printBack();
             break;
 
         // delete one
-        case 4:
+        case 5:
             myQueue.pop();
             break;
 
         // delete all
-        case 5:
+        case 6:
             myQueue.deleteAll();
             break;
 
         // complete task
-        case 6:
+        case 7:
             if(myQueue.isEmpty()){
                 std::cout << "Stack is empty\n";
                 break;
             }
 
             myQueue.copyToMax(taskQueue);
-            taskQueue.print();
+            taskQueue.printFront();
             break;
         case 0:
             stop = true;
