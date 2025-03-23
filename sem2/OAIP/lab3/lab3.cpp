@@ -76,7 +76,7 @@ public:
 
     void printFront(){
         if(isEmpty()){
-            std::cout << "Queue is empty\n";
+            std::cout << "List is empty\n";
             return;
         }
 
@@ -90,7 +90,7 @@ public:
 
     void printBack(){
         if(isEmpty()){
-            std::cout << "Queue is empty\n";
+            std::cout << "List is empty\n";
             return;
         }
 
@@ -191,7 +191,7 @@ int main()
         // complete task
         case 7:
             if(myQueue.isEmpty()){
-                std::cout << "Stack is empty\n";
+                std::cout << "List is empty\n";
                 break;
             }
 

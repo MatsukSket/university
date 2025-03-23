@@ -77,6 +77,10 @@ int main()
         case 5:
             DeleteStud(file);
             break;
+        case 6:
+            
+        case 0:
+            return 0;
         default:
             break;
         }
@@ -85,7 +89,7 @@ int main()
 }
 
 void Create(FILE* file)
-{
+{   
     file = fopen("students.bin", "wb");
     if(!file){
         cout << "Ошибка при открытии файла!\n";
@@ -96,7 +100,7 @@ void Create(FILE* file)
 }
 
 void AddStud(FILE* file)
-{
+{   
     file = fopen("students.bin", "ab");
     if(!file){
         cout << "Ошибка при открытии файла!\n";
@@ -164,22 +168,26 @@ void EditStud(FILE* file) {
         }
         pos = ftell(file);
     }
-
-    if (!success) {
-        cout << "Нет студента с таким именем\n";
-    }
-
     fclose(file);
+
+    
+    if (success) 
+        cout << "Изменения применены\n";
+    else
+        cout << "Нет студента с таким именем\n";
+    
 }
 
 void DeleteStud(FILE* file) 
 {   
+    // чтение, поиск, удаление
     file = fopen("students.bin", "rb");
     if(!file){
         cout << "Ошибка при чтении файла!\n";
         return;
     }
 
+    bool success = false;
     char name_find[50];
     cin.ignore();
     cout << "Введите имя студента для удаления: ";
@@ -188,14 +196,18 @@ void DeleteStud(FILE* file)
     student studs[50];
     int count = -1, pos = -1;
     for(int i = 0; fread(&studs[i], sizeof(student), 1, file); i++){
-        if(strComp(studs[i].fio, name_find) == 0)
+        if(strComp(studs[i].fio, name_find) == 0){
             i--;
+            success = true;
+        }
         count = i + 1;
     }
     fclose(file);
+
+    // запись
     file = fopen("students.bin", "wb");
     if(!file){
-        cout << "Ошибка при чтении файла!\n";
+        cout << "Ошибка при записи в файл!\n";
         return;
     }
 
@@ -203,6 +215,11 @@ void DeleteStud(FILE* file)
         fwrite(&studs[i], sizeof(student), 1, file);
     }
     fclose(file);
+
+    if (success) 
+        cout << "Информация о студенте удалена\n";
+    else
+        cout << "Нет студента с таким именем\n";
 }
 
 void OutputStudentData(student* stud)
@@ -221,3 +238,4 @@ int strComp(char* str1, char* str2)
             return str1[i] - str2[i];
     return str1[i] - str2[i];
 }
+
