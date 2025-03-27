@@ -11,13 +11,13 @@ private:
     class Node{
     public:
         int data;
-        Node *next = NULL;
+        Node *next = nullptr;
     };
-    Node *head = NULL;
+    Node *head = nullptr;
     
 public:
     bool isEmpty() {
-        return head == NULL;
+        return head == nullptr;
     }
 
     int top(){

@@ -11,15 +11,15 @@ private:
     class Node{
     public:
         int data;
-        Node *next = NULL;
-        Node *prev = NULL;
+        Node *next = nullptr;
+        Node *prev = nullptr;
     };
-    Node *head = NULL;
-    Node *last = NULL;
+    Node *head = nullptr;
+    Node *last = nullptr;
 
 public:
     bool isEmpty(){
-        return head == NULL;
+        return head == nullptr;
     }
 
     int front(){
@@ -58,17 +58,17 @@ public:
 
     void pop(){
         if(isEmpty()){
-            std::cout << "Queue is empty\n";
+            std::cout << "List is empty\n";
             return;
         }
 
         Node *temp = last;
         last = last->next;
         if(last)
-            last->prev = NULL;
+            last->prev = nullptr;
         else {
-            head->prev = NULL;
-            head = NULL;
+            head->prev = nullptr;
+            head = nullptr;
         }
         
         delete temp;

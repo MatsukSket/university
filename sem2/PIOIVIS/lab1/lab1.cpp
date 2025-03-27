@@ -11,15 +11,15 @@ public:
     class Node{
     public:
         int data;
-        Node *next = NULL;
-        Node *prev = NULL;
+        Node *next = nullptr;
+        Node *prev = nullptr;
     };
-    Node *head = NULL;
-    Node *last = NULL;
+    Node *head = nullptr;
+    Node *last = nullptr;
 
 // functions
     bool isEmpty(){
-        return head == NULL;
+        return head == nullptr;
     }
     
     void pushFront(int new_value)
@@ -59,10 +59,10 @@ public:
         Node *temp = head;
         head = head->prev;
         if(head)
-            head->next = NULL;
+            head->next = nullptr;
         else {
-            last->next = NULL;
-            last = NULL;
+            last->next = nullptr;
+            last = nullptr;
         }
         delete temp;
     }
@@ -72,18 +72,17 @@ public:
         Node *temp = last;
         last = last->next;
         if(last)
-            last->prev = NULL;
+            last->prev = nullptr;
         else {
-            head->prev = NULL;
-            head = NULL;
+            head->prev = nullptr;
+            head = nullptr;
         }
         delete temp;
     }    
 
     void print()
     {
-        Node *curr = new Node;
-        curr = last;
+        Node *curr = last;
         while(curr){
             std::cout << curr->data << ' ';
             curr = curr->next;
@@ -193,7 +192,17 @@ int main()
     int whatToDo, value;
     List myList, uniList, interList, secList;
 
-    std::cout << "1 - push front\n2 - push last\n3 - delete first\n4 - delete last\n5 - view\n6 - sort\n7 - find\n8 - unification\n9 - intersection\n0 - exit\n";
+    std::cout << '\n';
+    std::cout << "1 - push front\n"
+                 "2 - push last\n"
+                 "3 - delete first\n"
+                 "4 - delete last\n"
+                 "5 - view\n"
+                 "6 - sort\n"
+                 "7 - find\n"
+                 "8 - unification\n"
+                 "9 - intersection\n"
+                 "0 - exit\n";
 
     bool stop = false;
     while(!stop){
@@ -206,6 +215,7 @@ int main()
         case 1: case 2:
             std::cout << "Enter the value: ";   std::cin >> value;
             (whatToDo == 1) ? myList.pushFront(value) : myList.pushLast(value);
+            std::cout << "Successfully\n";
             break;
         // pop
         case 3: case 4:
@@ -214,6 +224,7 @@ int main()
                 break;
             }
             (whatToDo == 3) ? myList.popFront() : myList.popLast();
+            std::cout << "Successfully\n";
             break;
         // print
         case 5:
@@ -221,6 +232,7 @@ int main()
                 std::cout << "List is empty\n";
                 break;
             }
+            std::cout << "Your list:\n";
             myList.print();
             break;
         // sort
@@ -229,7 +241,9 @@ int main()
                 std::cout << "List is empty\n";
                 break;
             }
+
             myList.sort();
+            std::cout << "Your list was sorted successfully:\n";
             myList.print();
             break;
         // find
@@ -244,7 +258,7 @@ int main()
         case 8:
             std::cout << "First list: "; myList.print();
             secList.deleteAll();
-            std::cout << "Enter 5 values: ";
+            std::cout << "Enter 5 values for unification: ";
             for(int i = 0; i < 5; i++){
                 std::cin >> value;
                 secList.pushFront(value);
@@ -259,7 +273,7 @@ int main()
         case 9:
             std::cout << "First list: "; myList.print();
             secList.deleteAll();
-            std::cout << "Enter 5 values: ";
+            std::cout << "Enter 5 values for intersection:";
             for(int i = 0; i < 5; i++){
                 std::cin >> value;
                 secList.pushFront(value);
@@ -278,6 +292,7 @@ int main()
             std::cout << "Incorrect input. Try again\n";
             break;
         }
+        std::cout << '\n';
     }
 
     return 0;

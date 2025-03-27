@@ -2,9 +2,17 @@
 
 using namespace std;
 
-float 
+class Stack{
+    struct Node{
+        char c;
+        Node* next = nullptr;
+    };
+    Node* head = nullptr;
+
+};
+
 float rpn(char* str, int i){
-    if(str[i])
+    if(str[i]);
 }
 
 int main()
