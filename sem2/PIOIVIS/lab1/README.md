@@ -218,31 +218,32 @@ class List{
 ```
 * Оптимизированная сортировка пузырьком (сортировка остановится, если список уже отсортирован).
 ## Тесты:
-* Добавление элементов
+### Добавление элементов
   
-![Push front/back](img\push_front_back.png)
+![Push front/back](https://github.com/iis-42x70x/RPIIS/blob/Мацукевич_З/sem2/lab1/img/push_front_back.png)
 
-* Удаление элементов
+### Удаление элементов
   
-![Delete front/back](img\delete_front_back.png)
+![Delete front/back](https://github.com/iis-42x70x/RPIIS/blob/Мацукевич_З/sem2/lab1/img/delete_front_back.png)
 
-* Сортировка
+### Сортировка
   
-![Sort](img\sort.png)
+![Sort](https://github.com/iis-42x70x/RPIIS/blob/Мацукевич_З/sem2/lab1/img/sort.png)
 
-* Поиск
+### Поиск
   
-![Find](img\find.png)
+![Find](https://github.com/iis-42x70x/RPIIS/blob/Мацукевич_З/sem2/lab1/img/find.png)
 
-* Объединение
+### Объединение
   
-![Unification](img\unification.png)
+![Unification](https://github.com/iis-42x70x/RPIIS/blob/Мацукевич_З/sem2/lab1/img/unification.png)
 
-* Пересечение
+### Пересечение
   
-![Intersection](img\intersection.png)
+![Intersection](https://github.com/iis-42x70x/RPIIS/blob/Мацукевич_З/sem2/lab1/img/intersection.png)
 
-  ## Вывод
+
+## Вывод
 
 В ходе выполнения лабораторной работы был создан класс для работы с двунаправленными списками. В нем я реализовал основные операции над двунарпавленными списками: вставка элемента в список, удаление элемента из списка, сортировка списка, поиск элемента в списке, объединение двух списков, пересечение двух списков.
 
