@@ -78,7 +78,7 @@ int main()
             DeleteStud(file);
             break;
         case 6:
-            
+            LineSearchFIO(file);
         case 0:
             return 0;
         default:
@@ -229,9 +229,9 @@ void OutputStudentData(student* stud)
 
 int strComp(char* str1, char* str2)
 {   
-    // 0 - str1=str2
-    // positive - str1>str2
-    // negative - str1<str2
+    //  0 -> str1=str2
+    //  1 -> str1>str2
+    // -1 -> str1<str2
     int i;
     for(i = 0; str1[i] != '\0' && str2[i] != '\0'; i++)
         if(str1[i] != str2[i])
@@ -239,3 +239,35 @@ int strComp(char* str1, char* str2)
     return str1[i] - str2[i];
 }
 
+void LineSearchFIO(FILE* file) {
+    file = fopen("students.bin", "rw");
+    if(!file){
+        cout << "Ошибка при чтении файла!\n";
+        return;
+    }
+
+    char name_find[50];
+    cin.ignore();
+    cout << "Введите имя студента: ";
+    cin.getline(name_find, 50);
+
+    student stud;
+    bool success = false;
+    long int pos = 0;
+
+    while (fread(&stud, sizeof(student), 1, file)) {
+        if (strComp(stud.fio, name_find) == 0) {
+            success = true;
+            cout << "Информация об этом студенте:\n";
+            OutputStudentData(&stud);
+            break;
+        }
+    }
+    fclose(file);
+    
+    if (success) 
+        cout << "Изменения применены\n";
+    else
+        cout << "Нет студента с таким именем\n";
+    
+}
