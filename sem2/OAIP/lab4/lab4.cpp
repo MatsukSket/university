@@ -11,24 +11,31 @@ private:
     Node* head = nullptr;
 
 public:
+    // конструктор поумолчанию
+    Stack() = default;
+
+    // конструктор копирования
+    Stack(const Stack& other) : head(nullptr) {
+        *this = other;
+    }
     // оператор присвоения
     Stack& operator=(const Stack& other) {
-        if(this == &other)  // проверка на одинаковость
-            return *this;
+        if (this == &other) {
+            return *this; // Проверка на одинаковость
+        }
+
+        Stack <T> temp;
+        Node* curr = other.head;
+        while (curr) {
+            temp.push(curr->data);
+            curr = curr->next;
+        }
 
         deleteAll();
 
-        if(!other.isEmpty()) {
-            Stack temp;
-            Node* curr = other.head;
-            while(curr){
-                temp.push(curr->data);
-                curr = curr->next;
-            }
-            while(!temp.isEmpty()) {
-                this->push(temp.top()); 
-                temp.pop();
-            }
+        while (!temp.isEmpty()) {
+            this->push(temp.top());
+            temp.pop();
         }
 
         return *this;
@@ -50,7 +57,7 @@ public:
             cout << "Error: pop!\n";
             return;
         }
-        
+
         Node *temp = head;
         head = head->next;
         delete temp;
@@ -146,7 +153,7 @@ Stack <char> get_rpn(char* str){
                 symbols.pop();
             continue;
         }
-        
+
         if('a' <= str[i] && str[i] <= 'z'){
             rpn.push(str[i]);
             continue;
@@ -175,24 +182,24 @@ float get_ans(Stack<char> rpn){
         if('a' <= symb && symb <= 'z')
             temp.push(get_num(symb));
         else {
-            float x = temp.top();   temp.pop(); 
+            float x = temp.top();   temp.pop();
             float y = temp.top();   temp.pop();
             switch (symb)
             {
-            case '+':
-                temp.push(x+y);
-                break;
-            case '-':
-                temp.push(y-x);
-                break;
-            case '*':
-                temp.push(x*y);
-                break;
-            case '/':
-                temp.push(y/x);
-                break;
-            default:
-                break;
+                case '+':
+                    temp.push(x+y);
+                    break;
+                case '-':
+                    temp.push(y-x);
+                    break;
+                case '*':
+                    temp.push(x*y);
+                    break;
+                case '/':
+                    temp.push(y/x);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -202,9 +209,9 @@ float get_ans(Stack<char> rpn){
 
 int main()
 {
-    Stack <char> rpn; 
+    Stack <char> rpn;
     char *str = new char[50];
-    
+
     cin.getline(str, 50);
     for(int i = 0; str[i] != '\0'; i++)
         cout << str[i];
@@ -212,7 +219,7 @@ int main()
     rpn = get_rpn(str);
     rpn.reverse();
     rpn.print();
-    
+
     cout << get_ans(rpn);
     delete str;
     return 0;

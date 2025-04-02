@@ -5,7 +5,6 @@
 int getRandom(){
     return rand() % 199 - 99;
 }
-
 class List{
 private:
     class Node{
@@ -74,7 +73,7 @@ public:
         delete temp;
     }    
 
-    void printFront(){
+    void printBack(){
         if(isEmpty()){
             std::cout << "List is empty\n";
             return;
@@ -88,7 +87,7 @@ public:
         std::cout << '\n';
     }
 
-    void printBack(){
+    void printFront(){
         if(isEmpty()){
             std::cout << "List is empty\n";
             return;
@@ -116,7 +115,7 @@ public:
         return max_element;
     }
 
-    void copyToMax(List &other) 
+    void moveToMax(List &other) 
     {
         other.deleteAll();
         Node *curr = findMax();
@@ -125,6 +124,22 @@ public:
             other.pushfront(curr->data);
             curr = curr->next;
         }
+    }
+    // защита
+    void task(){
+        Node *max_el = findMax();
+        Node *dot = head->prev;
+        if(dot)
+            if(max_el != dot->next && max_el != dot && max_el != dot->prev){
+                Node *curr = dot->prev;
+                while(curr != max_el){
+                    Node *temp = curr;
+                    curr = curr->prev;
+                    temp->prev->next = temp->next;
+                    temp->next->prev = temp->prev;
+                    delete temp;
+                }
+            }
     }
 
     void deleteAll(){
@@ -195,8 +210,11 @@ int main()
                 break;
             }
 
-            myQueue.copyToMax(taskQueue);
-            taskQueue.printFront();
+            // myQueue.moveToMax(taskQueue);
+            // taskQueue.printFront();
+
+            myQueue.task();
+            myQueue.printFront();
             break;
         case 0:
             stop = true;
