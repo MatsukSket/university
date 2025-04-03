@@ -106,6 +106,57 @@ public:
     }
 };
 
+bool isMath(char c){
+    return c == '+' || c == '-' || c == '*' || c == '/';
+}
+
+bool isLetter(char c){
+    return 'a' <= c && c <= 'z';
+}
+
+bool isValid(char *str){
+    Stack <char> brackets;
+
+    if(!isLetter(str[0]) && str[0] != '(')
+        return false;
+    
+    if(str[0] == '(')
+        brackets.push('(');
+    
+    for(int i = 1; str[i] != '\0'; i++){
+        if(str[i] == '('){
+            if(isLetter(str[i-1]) || str[i-1] == ')')
+                return false;
+            brackets.push('(');
+            continue;
+        }
+        if(str[i] == ')'){
+            if(isMath(str[i-1]) || str[i-1] == '(')
+                return false;
+            if(!brackets.isEmpty())
+                brackets.pop();
+            else
+                return false;
+            continue;
+        }
+
+        if(isLetter(str[i])){
+            if(isLetter(str[i-1]) || str[i-1] == ')')
+                return false;
+            continue;
+        }
+        
+        if(isMath(str[i])){
+            if(isMath(str[i-1]) || str[i-1] == '(')
+                return false;
+            continue;
+        }
+    }
+    if(!brackets.isEmpty())
+        return false;
+    return true;
+}
+
 int symbol_priority(char a){
     if (a == '+' || a == '-')
         return 1;
@@ -154,16 +205,17 @@ Stack <char> get_rpn(char* str){
             continue;
         }
 
-        if('a' <= str[i] && str[i] <= 'z'){
+        if(isLetter(str[i])){
             rpn.push(str[i]);
             continue;
         }
-
-        while(!symbols.isEmpty() && symbol_priority(str[i]) <= symbol_priority(symbols.top())){
-            rpn.push(symbols.top());
-            symbols.pop();
+        if(isMath(str[i])){
+            while(!symbols.isEmpty() && symbol_priority(str[i]) <= symbol_priority(symbols.top())){
+                rpn.push(symbols.top());
+                symbols.pop();
+            }
+            symbols.push(str[i]); 
         }
-        symbols.push(str[i]);
     }
 
     while(!symbols.isEmpty()){
@@ -212,10 +264,15 @@ int main()
     Stack <char> rpn;
     char *str = new char[50];
 
+    cout << "enter data: ";
     cin.getline(str, 50);
     for(int i = 0; str[i] != '\0'; i++)
         cout << str[i];
     cout << endl;
+    if(!isValid(str)){
+        cout << "Error: Invalid input!\n";
+        return -1;
+    }
     rpn = get_rpn(str);
     rpn.reverse();
     rpn.print();
