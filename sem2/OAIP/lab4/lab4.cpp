@@ -2,6 +2,98 @@
 
 using namespace std;
 
+class Set{
+private:
+    class Node{
+    public:
+        char symbol = NULL;
+        float value = NULL;
+        Node *next = nullptr;
+    };
+    Node *head = nullptr;
+public:
+    // конструктор поумолчанию
+    Set() = default;
+    
+    // конструктор копирования
+    Set(const Set& other) : head(nullptr) {
+        *this = other;
+    }
+
+    // оператор присвоения
+    Set& operator=(const Set& other) {
+        if(this == &other) {
+            return *this;
+        }
+        
+        deleteAll();
+
+        Node* curr = other.head;
+        while(curr){
+            this->push(curr->symbol, curr->value);
+            curr = curr->next;
+        }
+
+        return *this;
+    }
+
+    Node *findSymb(char c){
+        Node *curr = head;
+        while(curr){
+            if(curr->symbol == c)
+                return curr;
+            curr = curr->next;
+        }
+        return nullptr;
+    }
+
+    void push(char c, float val){
+        Node *new_node = new Node;
+        new_node->symbol = c;
+        new_node->value = val;
+        new_node->next = head;
+        head = new_node;
+    }
+
+    void pushSymb(char c){
+        Node *element = findSymb(c);
+        if(!element){
+            element = new Node;
+            element->symbol = c;
+            element->next = head;
+            head = element;
+        }
+    } 
+
+    void fillValues(){
+        Node *curr = head;
+        while(curr){
+            cout << "Enter " << curr->symbol << ": ";
+            float val;
+            cin >> val;
+            curr->value = val;
+            curr = curr->next;
+        }
+    }
+
+    float getValue(char c){
+        Node *element = findSymb(c);
+        return element->value;
+    }
+
+    void deleteAll(){
+        Node *curr = head;
+        while(curr){
+            Node *temp = curr;
+            curr = curr->next;
+            delete temp;
+        }
+    }
+
+    ~Set(){
+        deleteAll();
+    }
+};
 template <typename T> class Stack{
 private:
     struct Node{
@@ -18,6 +110,7 @@ public:
     Stack(const Stack& other) : head(nullptr) {
         *this = other;
     }
+
     // оператор присвоения
     Stack& operator=(const Stack& other) {
         if (this == &other) {
@@ -114,7 +207,7 @@ bool isLetter(char c){
     return 'a' <= c && c <= 'z';
 }
 
-bool isValid(char *str){
+bool isValid(char *str, Set &variables){
     Stack <char> brackets;
 
     if(!isLetter(str[0]) && str[0] != '(')
@@ -122,6 +215,10 @@ bool isValid(char *str){
     
     if(str[0] == '(')
         brackets.push('(');
+
+    if(isLetter(str[0]))
+        variables.pushSymb(str[0]);
+    
     
     for(int i = 1; str[i] != '\0'; i++){
         if(str[i] == '('){
@@ -141,6 +238,7 @@ bool isValid(char *str){
         }
 
         if(isLetter(str[i])){
+            variables.pushSymb(str[i]);
             if(isLetter(str[i-1]) || str[i-1] == ')')
                 return false;
             continue;
@@ -162,28 +260,6 @@ int symbol_priority(char a){
         return 1;
     if (a == '*' || a == '/')
         return 2;
-    return 0;
-}
-
-float get_num(char c){
-    // test
-    if (c == 'a')   return 5.6;
-    if (c == 'b')   return 7.4;
-    if (c == 'c')   return 8.9;
-    if (c == 'd')   return 3.1;
-    if (c == 'e')   return 0.2;
-    if (c == 'f')   return 1.5;
-    if (c == 'g')   return 2.0;
-    if (c == 'h')   return 4.8;
-    if (c == 'k')   return 6.3;
-    if (c == 'm')   return 9.7;
-
-    // task
-    // if (c == 'a')   return 1.6;
-    // if (c == 'b')   return 4.9;
-    // if (c == 'c')   return 5.7;
-    // if (c == 'd')   return 0.8;
-    // if (c == 'e')   return 2.3;
     return 0;
 }
 
@@ -226,13 +302,13 @@ Stack <char> get_rpn(char* str){
     return rpn;
 }
 
-float get_ans(Stack<char> rpn){
+float get_ans(Stack<char> rpn, Set variables){
     Stack <float> temp;
     while(!rpn.isEmpty()){
         char symb = rpn.top();      rpn.pop();
 
         if('a' <= symb && symb <= 'z')
-            temp.push(get_num(symb));
+            temp.push(variables.getValue(symb));
         else {
             float x = temp.top();   temp.pop();
             float y = temp.top();   temp.pop();
@@ -262,6 +338,7 @@ float get_ans(Stack<char> rpn){
 int main()
 {
     Stack <char> rpn;
+    Set variables;
     char *str = new char[50];
 
     cout << "enter data: ";
@@ -269,15 +346,17 @@ int main()
     for(int i = 0; str[i] != '\0'; i++)
         cout << str[i];
     cout << endl;
-    if(!isValid(str)){
+    if(!isValid(str, variables)){
         cout << "Error: Invalid input!\n";
         return -1;
     }
+    variables.fillValues();
+
     rpn = get_rpn(str);
     rpn.reverse();
     rpn.print();
 
-    cout << get_ans(rpn);
+    cout << get_ans(rpn, variables);
     delete str;
     return 0;
 }

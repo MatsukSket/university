@@ -1,273 +1,353 @@
-// не работает ввод имени на русском языке!!!
 #include <iostream>
-#include <stdio.h>
+#include <fstream>
 #include <iomanip>
+#include <limits>
+#include <cstdio>
 
 using namespace std;
 
-struct student{
-    char fio[50];
+struct Student {
+    char name[30];
     int group;
     float score;
     bool activist;
     int income;
 };
 
-void Create(FILE*);
-void AddStud(FILE*);
-void EnterStudentData(student*);
-void ViewAll(FILE*);
-void OutputStudentData(student*);
-void EditStud(FILE*);
-void DeleteStud(FILE*);
-void LineSearchFIO(FILE*);
-void BinSearchGroup(FILE*);
-void QuickSortFIO(FILE*);
-void SelectionSortGroup(FILE*);
-void InsertSortScore(FILE*);
-void SignSearch(FILE*);
-int strComp(char*, char*);
-void ReadData(FILE*, student*, int*, int*);
+// main functions
+void createFile();
+void addStudent();
+void printAll();
+void editStudent();
+void deleteStudent();
+void lineSearch();
 
-int main()
-{   
-    setlocale(0, "ru");
-    
-    FILE* file = fopen("students.bin", "rb");
-    if (file == nullptr) {
-        cout << "Ошибка при открытии файла!\n";
-        return -1;
-    }
-    fclose(file);
-    
-    cout << "Меню\n"
-            "1 - Создать новый файл\n"
-            "2 - Добавить студента\n"
-            "3 - Просмотр\n"
-            "4 - Редактировать данные о студенте\n"
-            "5 - Удаление информации о студенте\n"
-            "6 - Линейный поиск по ФИО\n"
-            "7 - Бинарный поиск номеру группы\n"
-            "8 - Быстрая сортировка по ФИО\n"
-            "9 - Сортировка выбором по номеру группы\n"
-            "10 - Сортировка вставками по среднему баллу\n"
-            "11 - Поиск по признаку\n"
-            "12 - Составить очередь\n"
-            "0 - Выход.\n";
+// helper functions
+void inputStudentInfo(Student* stud);
+void printStudent(Student* stud);
+void printTable();
+int inputNewGroup();
+float inputNewScore();
+bool inputNewActivist();
+int getStudentCount();
+int strComp(char *first, char *second);
+Student *getStudentArray(int studCount);
+void writeStudentArray(Student *studs);
+Student *findStudentName(Student *studs, char *name, int studCount);
+void txtOutputStudent(Student &student);
+void txtTable();
+void txtSpace();
+
+int main() {
+    setlocale(LC_ALL, "ru");
     
     int what_to_do;
-    bool end_program;
-    do{
-        end_program = false;
-        cout << "Выберите номер операции: ";    cin >> what_to_do;
-        switch (what_to_do)
-        {
+    bool end_program = false;
+    
+    do {
+        cout << "Menu\n"
+                "1 - Create new file\n"
+                "2 - Add student\n"
+                "3 - View all\n"
+                "4 - Edit student\n"
+                "5 - Delete student\n"
+                "6 - Line search by name\n"
+                "7 - Binary search by group\n"
+                "8 - Quick sort by name\n"
+                "9 - Selevtion sort by group\n"
+                "10 - Insertion sort by av. score\n"
+                "11 - Special sort\n"
+                "12 - Complete task\n"
+                "0 - Exit\n";
+
+        cout << "Enter the number: ";
+        cin >> what_to_do;
+        cin.ignore();
+        
+        switch (what_to_do) {
         case 1:
-            Create(file);
+            createFile();
             break;
         case 2:
-            AddStud(file);
+            addStudent();
             break;
         case 3:
-            ViewAll(file);
+            printAll();
             break;
         case 4:
-            EditStud(file);
+            editStudent();
             break;
         case 5:
-            DeleteStud(file);
+            deleteStudent();
             break;
         case 6:
-            LineSearchFIO(file);
+            lineSearch();
+            break;
         case 0:
-            return 0;
+            end_program = true;
+            break;
         default:
+            cout << "Unknown operation!\n";
             break;
         }
-    }while(!end_program);
+    } while (!end_program);
+    
     return 0;
 }
 
-void Create(FILE* file)
-{   
-    file = fopen("students.bin", "wb");
-    if(!file){
-        cout << "Ошибка при открытии файла!\n";
-        return;
-    }
+void createFile() {
+    FILE* file = fopen("students.bin", "wb");
     fclose(file);
-    return;
+    cout << "File was created\n";
 }
 
-void AddStud(FILE* file)
-{   
-    file = fopen("students.bin", "ab");
-    if(!file){
-        cout << "Ошибка при открытии файла!\n";
-        return;
-    }
+void addStudent() {
+    FILE* file = fopen("students.bin", "ab");
 
-    student stud;
-    cin.ignore();
-    EnterStudentData(&stud);
-
-    fwrite(&stud, sizeof(student), 1, file);
+    Student new_stud;
+    cout << "Enter new student data\n";
+    inputStudentInfo(&new_stud);
+    
+    fwrite(&new_stud, sizeof(Student), 1, file);
     fclose(file);
 }
 
-void EnterStudentData(student* stud)
-{
-    cout << "Введите ФИО студента: "; cin.getline(stud->fio, 50);
-    cout << "Введите номер группы: "; cin >> stud->group;
-    cout << "Введите средний балл: "; cin >> stud->score;
-    cout << "Студент активист? (1 - да, 0 - нет): "; cin >> stud->activist;
-    cout << "Средний доход на члена семьи: "; cin >> stud->income;
+int inputNewGroup() {
+    int group;
+    cout << "Group number (6 digits): ";
+    while (true) {
+        cin >> group;
+        if (100000 <= group && group <= 999999)
+            return group;
+        
+        cout << "Error. Enter 6 digits\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
 }
 
-void ViewAll(FILE* file)
-{
-    file = fopen("students.bin", "rb");
-    if(!file){
-        cout << "Ошибка при открытии файла!\n";
-        return;
+float inputNewScore() {
+    float score;
+    cout << "Enter average score (0 - 10): ";
+    while (true) {
+        cin >> score;
+        if (0.0 <= score && score <= 10.0)
+            return score;
+        
+        cout << "Error. Enter number from 0 to 10\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+bool inputNewActivist() {
+    char activist;
+    while (true) {
+        cout << "Activist? (1 - yes, 0 - no): ";
+        cin >> activist;
+        if (activist == '1') return true;
+        if (activist == '0') return false;
+        
+        cout << "Error. Enter 1 or 0\n";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+}
+
+void printStudent(Student* stud) {
+    cout << setw(30) << left << stud->name 
+         << setw(10) << left << stud->group
+         << setw(10) << right << fixed << setprecision(2) << stud->score
+         << setw(15) << right << (stud->activist ? "yes" : "no") 
+         << setw(20) << right << stud->income << endl;
+}
+
+void printTable() {
+    cout << setw(30) << left << " name"
+         << setw(10) << left << "group"
+         << setw(10) << right << "av. score"
+         << setw(15) << right << "activist"
+         << setw(20) << right << "income" << endl;
+}
+
+void inputStudentInfo(Student* stud) {
+    cout << "name: ";
+    cin.getline(stud->name, 30);
+    
+    stud->group = inputNewGroup();
+    stud->score = inputNewScore();
+    stud->activist = inputNewActivist();
+    
+    cout << "Income per family member: ";
+    while (!(cin >> stud->income) || stud->income < 0) {
+        cout << "Error, enter integer: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
     
-    student stud;
-    printf("%-30s%-10s%-15s%-15s%-10s\n", "  FIO", "Group", "Av. score", "activist", "income");
-    while(fread(&stud, sizeof(student), 1, file)){
-        OutputStudentData(&stud);
-    }
-    fclose(file);
-}   
+    cout << "\nStudent was added.\n";
+    printTable();
+    printStudent(stud);
+}
 
-void EditStud(FILE* file) {
-    file = fopen("students.bin", "rb+");
-    if (!file) {
-        cout << "Ошибка при открытии файла!\n";
+void printAll(){
+    FILE *file = fopen("students.bin", "rb");
+    if(!file){
+        cout << "File open error!\n";
         return;
     }
 
-    char name_find[50];
-    cin.ignore();
-    cout << "Введите имя студента для редактирования: ";
-    cin.getline(name_find, 50);
+    Student stud;
+    printTable();
+    while(fread(&stud, sizeof(Student), 1, file))
+        printStudent(&stud);
+    
+    cout << endl;
+    fclose(file);
+}
 
-    student stud;
+Student *getStudentArray(int studCount){
+    FILE *file = fopen("students.bin", "rb");
+    if(!file){
+        cout << "File read error!\n";
+        return nullptr;
+    }
+
+    Student *studs = new Student[studCount];
+    for(int i = 0; i < studCount; i++)
+        fread(&studs[i], sizeof(Student), 1, file);
+    
+    return studs;
+}
+
+void writeStudentArray(Student *studs, int studCount){
+    FILE *file = fopen("students.bin", "wb");
+
+    for(int i = 0; i < studCount; i++)
+        fwrite(&studs[i], sizeof(Student), 1, file);
+
+    fclose(file);
+}
+
+int strComp(char* first, char* second) {
+    while (*first && *second && *first == *second) {
+        first++;
+        second++;
+    }
+    
+    if (*first < *second) return -1;
+    if (*first > *second) return 1;
+    return 0;
+}
+
+void editStudent(){
+    int studCount = getStudentCount();
+    Student *studs = getStudentArray(studCount);
+    char *editName = new char[30];
     bool success = false;
-    long int pos = 0;
+    cout << "Enter student name for edit: ";    cin.getline(editName, 30);
 
-    while (fread(&stud, sizeof(student), 1, file)) {
-        if (strComp(stud.fio, name_find) == 0) {
-            success = true;
-            cout << "Введите новые данные для студента:\n";
-            EnterStudentData(&stud);
+    Student *studentForEdit = findStudentName(studs, editName, studCount);
 
-            fseek(file, pos, SEEK_SET);
-            fwrite(&stud, sizeof(student), 1, file);
-            break;
-        }
-        pos = ftell(file);
+    if(studentForEdit != nullptr){
+        success = true;
+        cout << "Enter new info\n";
+        inputStudentInfo(studentForEdit);    
     }
-    fclose(file);
 
-    
-    if (success) 
-        cout << "Изменения применены\n";
+    delete[] studs;
+    delete editName;
+    if(success)
+        cout << "Changes was saved.\n";
     else
-        cout << "Нет студента с таким именем\n";
-    
+        cout << "No such student.\n";
 }
 
-void DeleteStud(FILE* file) 
-{   
-    // чтение, поиск, удаление
-    file = fopen("students.bin", "rb");
+int getStudentCount(){
+    FILE *file = fopen("students.bin", "rb");
     if(!file){
-        cout << "Ошибка при чтении файла!\n";
-        return;
+        cout << "File open error!\n";
+        return 0;
     }
 
+    fseek(file, 0, SEEK_END);
+    long file_size = ftell(file);
+    
+    fclose(file);
+    return file_size / sizeof(Student);
+}
+
+Student *findStudentName(Student *studs, char *name, int studCount){
+    for(int i = 0; i < studCount; i++)
+        if(strComp(studs[i].name, name) == 0)
+            return &studs[i];
+    return nullptr;
+}
+
+void deleteStudent(){
+    int studCount = getStudentCount();
+    Student *studs = getStudentArray(studCount);
+    char *deleteName = new char[30];
     bool success = false;
-    char name_find[50];
-    cin.ignore();
-    cout << "Введите имя студента для удаления: ";
-    cin.getline(name_find, 50);
+    cout << "Enter student name for delete: ";    cin.getline(deleteName, 30);
 
-    student studs[50];
-    int count = -1, pos = -1;
-    for(int i = 0; fread(&studs[i], sizeof(student), 1, file); i++){
-        if(strComp(studs[i].fio, name_find) == 0){
-            i--;
+    FILE *file = fopen("students.bin", "wb");
+
+    for(int i = 0; i < studCount; i++){
+        if(strComp(studs[i].name, deleteName) == 0){
             success = true;
+            continue;
         }
-        count = i + 1;
+        fwrite(&studs[i], sizeof(Student), 1, file);
     }
+
     fclose(file);
-
-    // запись
-    file = fopen("students.bin", "wb");
-    if(!file){
-        cout << "Ошибка при записи в файл!\n";
-        return;
-    }
-
-    for(int i = 0; i < count; i++){
-        fwrite(&studs[i], sizeof(student), 1, file);
-    }
-    fclose(file);
-
-    if (success) 
-        cout << "Информация о студенте удалена\n";
+    delete[] studs;
+    delete deleteName;
+    if(success)
+        cout << "Changes was saved.\n";
     else
-        cout << "Нет студента с таким именем\n";
+        cout << "No such student.\n";
 }
 
-void OutputStudentData(student* stud)
-{
-    printf("%-30s%-10d%-15.2f%-15d%-10d\n", stud->fio, stud->group, stud->score, stud->activist, stud->income);
-}
-
-int strComp(char* str1, char* str2)
-{   
-    //  0 -> str1=str2
-    //  1 -> str1>str2
-    // -1 -> str1<str2
-    int i;
-    for(i = 0; str1[i] != '\0' && str2[i] != '\0'; i++)
-        if(str1[i] != str2[i])
-            return str1[i] - str2[i];
-    return str1[i] - str2[i];
-}
-
-void LineSearchFIO(FILE* file) {
-    file = fopen("students.bin", "rw");
-    if(!file){
-        cout << "Ошибка при чтении файла!\n";
-        return;
-    }
-
-    char name_find[50];
-    cin.ignore();
-    cout << "Введите имя студента: ";
-    cin.getline(name_find, 50);
-
-    student stud;
+void lineSearch(){
+    int studCount = getStudentCount();
+    Student *studs = getStudentArray(studCount);
+    char *findName = new char[30];
     bool success = false;
-    long int pos = 0;
+    cout << "Enter student name for find: ";    cin.getline(findName, 30);
 
-    while (fread(&stud, sizeof(student), 1, file)) {
-        if (strComp(stud.fio, name_find) == 0) {
+    for(int i = 0; i < studCount; i++){
+        if(strComp(studs[i].name, findName) == 0){
             success = true;
-            cout << "Информация об этом студенте:\n";
-            OutputStudentData(&stud);
-            break;
+            printStudent(&studs[i]);
+            txtTable();
+            txtOutputStudent(studs[i]);
         }
     }
-    fclose(file);
-    
-    if (success) 
-        cout << "Изменения применены\n";
-    else
-        cout << "Нет студента с таким именем\n";
-    
+
+    delete[] studs;
+    delete findName;
+    if(!success) 
+        cout << "No such student.\n";
+    txtSpace();
 }
+
+void txtOutputStudent(Student &student){
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "%-30s%-10d%10.2f%15s%20d\n", student.name, student.group, student.score, (student.activist) ? "yes" : "no", student.income);
+    fclose(txt);
+}
+
+void txtTable() {
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "%-30s%-10s%10s%15s%20s\n", "name", "group", "av. score", "activist", "income");
+    fclose(txt);
+}
+
+void txtSpace() {
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "\n");
+    fclose(txt);
+}
+
