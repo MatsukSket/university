@@ -800,8 +800,9 @@ void getStats() {
     }
     
     cout << "Number of privileged students: " << privileged_count << endl << endl;
-    fprintf(fopen("log.txt", "a"), "\nPrivileged students: %d\n\n", privileged_count);
-    
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "Privileged students: %d\n\n", privileged_count);
+    fclose(txt);
     delete[] studs;
 }
 
