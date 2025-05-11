@@ -50,20 +50,33 @@ Tree::Node* Tree::rotateRight(Node *node) {
 }
 
 Tree::Node* Tree::balance(Node* node) {
+    if(height(node) <= 2)   return node;
+
     int balance_num = getBalanceNum(node);
 
-    if(balance_num > 1) {   // слева больше
-        if (getBalanceNum(node->left) < 0)
-            node->left = rotateLeft(node->left);
-        return rotateRight(node);
+    node->left = balance(node->left);
+    node->right = balance(node->right);
+
+    // L
+    if (balance_num > 1) {
+        if (getBalanceNum(node->left) >= 0) {       // LR
+            return rotateRight(node);
+        } else {
+            node->left = rotateLeft(node->left);    // LL
+            return rotateRight(node);
+        }
     }
 
-    if(balance_num < -1) {   // справа больше
-        if(getBalanceNum(node->right) > 0)
-            node->right = rotateRight(node->right);
-        return rotateLeft(node);
+    // R
+    if (balance_num < -1) { 
+        if (getBalanceNum(node->right) <= 0) {      // RR
+            return rotateLeft(node);
+        } else {
+            node->right = rotateRight(node->right); // RL
+            return rotateLeft(node);
+        }
     }
-
+    
     return node;
 }
 
