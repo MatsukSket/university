@@ -72,3 +72,7 @@ int main()
     }
     return 0;
 }
+
+// cd C:\Users\User\Desktop\university\sem2\OAIP\lab5
+// g++ lab5.cpp -o lab5 Tree.cpp
+// ./lab5.exe
