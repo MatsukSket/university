@@ -1,0 +1,120 @@
+2
+Ivanov Ivan Ivanovich
+123456
+7.2
+1
+850
+2
+Petrova Anna Sergeevna
+234567
+8.5
+0
+1200
+2
+Sidorov Mikhail Dmitrievich
+345678
+7.2
+0
+950
+2
+Kozlova Ekaterina Andreevna
+456789
+9.1
+1
+1100
+2
+Smirnov Artyom Vadimovich
+567890
+8.5
+1
+1300
+2
+Volkova Olga Nikolaevna
+123456
+6.8
+0
+750
+2
+Zaitsev Denis Olegovich
+234567
+7.2
+1
+1050
+2
+Pavlova Vera Aleksandrovna
+345678
+8.0
+0
+1400
+2
+Fedorov Grigory Igorevich
+456789
+8.5
+0
+1250
+2
+Orlova Daria Romanovna
+567890
+7.2
+1
+900
+2
+Belova Anastasia Pavlovna
+123456
+9.1
+0
+1150
+2
+Gusev Maxim Viktorovich
+234567
+6.8
+1
+800
+2
+Titova Alina Konstantinovna
+345678
+8.0
+1
+1500
+2
+Vorobyov Igor Anatolievich
+456789
+7.2
+0
+1000
+2
+Sokolov Nikita Valeryevich
+567890
+8.5
+1
+1350
+2
+Morozova Polina Denisovna
+123456
+6.8
+0
+700
+2
+Kuznetsov Daniil Sergeevich
+234567
+9.1
+1
+1600
+2
+Lebedeva Maria Alekseevna
+345678
+8.0
+0
+1450
+2
+Polyakov Alexander Dmitrievich
+456789
+7.2
+1
+950
+2
+Tikhonova Elizaveta Andreevna
+567890
+8.5
+0
+1550

@@ -7,7 +7,7 @@
 using namespace std;
 
 struct Student {
-    char name[30];
+    char name[40];
     int group;
     float score;
     bool activist;
@@ -29,19 +29,17 @@ void specialSearch();
 void getStats();
 
 // input/output
-void inputStudentInfo(Student* stud);
-void printStudent(Student* stud);
+void inputStudentInfo(Student *stud);
+void printStudent(Student *stud);
 void printTable();
 int inputNewGroup();
 float inputNewScore();
 bool inputNewActivist();
 void writeStudentArray(Student *studs, int stud_count);
 Student *getStudentArray(int stud_count);
-void txtOutputStudent(Student &student);
-void txtTable();
-void txtSpace();
-void txtWhatOp(int what_op);
-void txtOutputArray(Student *studs, int stud_count);
+void txtOutputStudent(FILE *txt, Student &student);
+void txtTable(FILE *txt);
+void txtOutputArray(FILE *txt, Student *studs, int stud_count);
 
 // helper functions
 int getStudentCount();
@@ -57,7 +55,9 @@ bool comparePriority(const Student& a, const Student& b, int min_salary);
 
 int main() {
     setlocale(LC_ALL, "ru");
-    
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "--START THE PROGRAM--\n\n");
+    fclose(txt);
     int what_to_do;
     bool end_program = false;
     
@@ -120,6 +120,9 @@ int main() {
             break;
         case 0:
             end_program = true;
+            txt = fopen("log.txt", "at");
+            fprintf(txt, "--CLOSE THE PROGRAM--\n\n");
+            fclose(txt);
             break;
         default:
             cout << "Unknown operation!\n";
@@ -134,25 +137,34 @@ void createFile(){
     FILE* file = fopen("students.bin", "wb");
     fclose(file);
     cout << "File was created\n\n";
-    txtWhatOp(1);
-    txtSpace();
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "--CREATE FILE--\nNew file was created\n\n");
+    fclose(txt);
 }
 
 void addStudent(){
     FILE* file = fopen("students.bin", "ab");
+    if(!file){
+        cout << "File open error!\n\n";
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--FILE OPEN ERROR--\n\n");
+        fclose(txt);
+        return;
+    }
 
     Student new_stud;
     cout << "Enter new student data\n";
     inputStudentInfo(&new_stud);
-    
     fwrite(&new_stud, sizeof(Student), 1, file);
     fclose(file);
+    
     cout << "Student was added\n\n";
-
-    txtWhatOp(2);
-    txtTable();
-    txtOutputStudent(new_stud);
-    txtSpace();
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "--ADD STUDENT--\n");
+    txtTable(txt);
+    txtOutputStudent(txt, new_stud);
+    fprintf(txt, "\n");
+    fclose(txt);
 }
 
 int inputNewGroup(){
@@ -198,7 +210,7 @@ bool inputNewActivist(){
 }
 
 void printStudent(Student* stud) {
-    cout << setw(30) << left << stud->name 
+    cout << setw(40) << left << stud->name 
         << setw(10) << left << stud->group
         << setw(10) << right << fixed << setprecision(2) << stud->score
         << setw(15) << right << (stud->activist ? "yes" : "no") 
@@ -211,7 +223,7 @@ void printStudentArray(Student *studs, int stud_count){
 }
 
 void printTable(){
-    cout << setw(30) << left << " name"
+    cout << setw(40) << left << " name"
         << setw(10) << left << "group"
         << setw(10) << right << "av. score"
         << setw(15) << right << "activist"
@@ -219,8 +231,8 @@ void printTable(){
 }
 
 void inputStudentInfo(Student* stud) {
-    cout << "name: ";
-    cin.getline(stud->name, 30);
+    cout << "Name: ";
+    cin.getline(stud->name, 40);
     
     stud->group = inputNewGroup();
     stud->score = inputNewScore();
@@ -240,29 +252,35 @@ void inputStudentInfo(Student* stud) {
 void printAll(){
     FILE *file = fopen("students.bin", "rb");
     if(!file){
-        cout << "File open error!\n";
+        cout << "File open error!\n\n";
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--FILE OPEN ERROR--\n\n");
+        fclose(txt);
         return;
     }
 
     if(getStudentCount() == 0){
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--PRINT ALL--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
 
     Student stud;
+    FILE *txt = fopen("log.txt", "at");
     printTable();
-    txtWhatOp(3);
-    txtTable();
+    fprintf(txt, "--PRINT ALL--\n");
+    txtTable(txt);
     while(fread(&stud, sizeof(Student), 1, file)){
         printStudent(&stud);
-        txtOutputStudent(stud);
+        txtOutputStudent(txt, stud);
     }
-    fclose(file);
-    
-    txtSpace();
     cout << endl;
+    fprintf(txt, "\n");
+
+    fclose(file);
+    fclose(txt);
 }
 
 Student *getStudentArray(int stud_count){
@@ -325,41 +343,43 @@ void editStudent(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--EDIT STUDENT--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
 
     Student *studs = getStudentArray(stud_count);
 
-    char editName[30];
+    char editName[40];
     cout << "Enter student name for edit: ";
-    cin.getline(editName, 30);
+    cin.getline(editName, 40);
 
     Student *studentForEdit = findStudentName(studs, editName, stud_count);
 
+    FILE *txt = fopen("log.txt", "at");
     if (studentForEdit != nullptr) {
         cout << "Current student data:\n";
         printTable();
         printStudent(studentForEdit);
         
-        txtWhatOp(4);
-        txtTable();
-        txtOutputStudent(*studentForEdit);
+        fprintf(txt, "--EDIT STUDENT--\nEdited student:\n");
+        txtTable(txt);
+        txtOutputStudent(txt, *studentForEdit);
 
         cout << "\nEnter new info:\n";
         inputStudentInfo(studentForEdit);
         
-        txtOutputStudent(*studentForEdit);
-        txtSpace();
+        txtOutputStudent(txt, *studentForEdit);
+        fprintf(txt, "\n");
 
         writeStudentArray(studs, stud_count);
-        cout << "Changes were saved.\n\n";
+        cout << "Changes were saved\n\n";
     } else {
-        cout << "No such student.\n\n";
-        txtWhatOp(15);
-        txtSpace();
+        cout << "No such student\n\n";
+        fprintf(txt, "--EDIT STUDENT--\nStudent %s not found\n\n", editName);
     }
+    fclose(txt);
 
     delete[] studs;
 }
@@ -367,7 +387,10 @@ void editStudent(){
 int getStudentCount(){
     FILE *file = fopen("students.bin", "rb");
     if(!file){
-        cout << "File open error!\n";
+        cout << "File open error!\n\n";
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--FILE OPEN ERROR--\n\n");
+        fclose(txt);
         return 0;
     }
 
@@ -389,15 +412,16 @@ void deleteStudent(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--DELETE STUDENT--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
 
     Student *studs = getStudentArray(stud_count);
-    char deleteName[30];
+    char deleteName[40];
     bool success = false;
-    cout << "Enter student name for delete: ";    cin.getline(deleteName, 30);
+    cout << "Enter student name for delete: ";    cin.getline(deleteName, 40);
 
     FILE *file = fopen("students.bin", "wb");
 
@@ -412,14 +436,16 @@ void deleteStudent(){
     fclose(file);
     delete[] studs;
     if(success){
-        txtWhatOp(5);
-        txtSpace();
-        cout << "Changes was saved.\n\n";
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--DELETE STUDENT--\nStudent was deleted\n\n");
+        fclose(txt);
+        cout << "Changes was saved\n\n";
     }
     else{
-        cout << "No such student.\n\n";
-        txtWhatOp(15);
-        txtSpace();
+        cout << "No such student\n\n";
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--DELETE STUDENT--\nStudent %s not found\n\n", deleteName);
+        fclose(txt);
     }
 }
 
@@ -427,137 +453,74 @@ void searchName(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--LINEAR SEARCH BY NAME--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
+
     Student *studs = getStudentArray(stud_count);
-    char findName[30];
+    char findName[40];
     bool success = false;
-    cout << "Enter student name for find: ";    cin.getline(findName, 30);
+    cout << "Enter student name for find: ";    cin.getline(findName, 40);
     
+    FILE *txt;
     for(int i = 0; i < stud_count; i++){
         if(strComp(studs[i].name, findName) == 0){
             if(!success){
-                txtWhatOp(6);
-                txtTable();
-            }
+                txt = fopen("log.txt", "at");
+                fprintf(txt, "--LINEAR SEARCH BY NAME--\n");
+                txtTable(txt);
+                printTable();
+            } 
             printStudent(&studs[i]);
-            txtOutputStudent(studs[i]);
+            txtOutputStudent(txt, studs[i]);
             success = true;
         }
     }
-
     delete[] studs;
+    
     if(!success) {
         cout << "No such student\n";
-        txtWhatOp(13);
+        txt = fopen("log.txt", "at");
+        fprintf(txt, "--LINEAR SEARCH BY NAME--\nStudent %s not found\n\n", findName);
     }
     cout << endl;
-
-    txtSpace();
-}
-
-void txtOutputStudent(Student &student){
-    FILE *txt = fopen("log.txt", "at");
-    fprintf(txt, "%-30s%-10d%10.2f%15s%20d\n", student.name, student.group, student.score, (student.activist) ? "yes" : "no", student.income);
     fclose(txt);
 }
 
-void txtTable(){
-    FILE *txt = fopen("log.txt", "at");
-    fprintf(txt, "%-30s%-10s%10s%15s%20s\n", " name", "group", "av. score", "activist", "income");
-    fclose(txt);
+void txtOutputStudent(FILE *txt, Student &student){
+    fprintf(txt, "%-40s%-10d%10.2f%15s%20d\n", student.name, student.group, student.score, (student.activist) ? "yes" : "no", student.income);
 }
 
-void txtSpace(){
-    FILE *txt = fopen("log.txt", "at");
-    fprintf(txt, "\n");
-    fclose(txt);
+void txtTable(FILE *txt){
+    fprintf(txt, "%-40s%-10s%10s%15s%20s\n", " name", "group", "av. score", "activist", "income");
 }
 
-void txtWhatOp(int what_op){
-    FILE *txt = fopen("log.txt", "at");
-    switch (what_op)
-    {
-    case 0:
-        fprintf(txt, "Database is empty\n");
-        break;
-    case 1:     // create file
-        fprintf(txt, "New file was created\n");
-        break;
-    case 2:     // add stud
-        fprintf(txt, "Added student\n");
-        break;
-    case 3:     // all student output
-        fprintf(txt, "All student list\n");
-        break;
-    case 4:     // edit student
-        fprintf(txt, "Edited student\n");
-        break;
-    case 5:     // delete student
-        fprintf(txt, "Student was deleted\n");
-        break;
-    case 15:    // not found student for delete or edit
-        fprintf(txt, "Student not found\n");
-        break;
-    case 6:     // line search by name
-        fprintf(txt, "Students was found (name)\n");
-        break;
-    case 13:
-        fprintf(txt, "Students not found (name)\n");
-        break;
-    case 7:     // binarysearch by group
-        fprintf(txt, "Students was found (group)\n");
-        break;
-    case 14:
-        fprintf(txt, "Students not found (group)\n");
-        break;
-    case 8:     // quicksort
-        fprintf(txt, "Student list sorted by name\n");
-        break;
-    case 9:     // selection sort
-        fprintf(txt, "Student list sorted by group\n");
-        break;
-    case 10:    // insertion sort
-        fprintf(txt, "Student list sorted by av. score\n");
-        break;
-    case 11:    // special sort
-        fprintf(txt, "Student was find and sorted (special)\n");
-        break;
-    case 16:    
-        fprintf(txt, "Student not found (special)\n");
-        break;
-    case 12:    // get statistic
-        fprintf(txt, "Priority list for dormitory\n");
-        break;
-    default:
-        break;
-    }
-    fclose(txt);
-}
-
-void txtOutputArray(Student *studs, int stud_count){
+void txtOutputArray(FILE *txt, Student *studs, int stud_count){
     for(int i = 0; i < stud_count; i++)
-        txtOutputStudent(studs[i]);
+        txtOutputStudent(txt, studs[i]);
 }
 
 void sortGroup(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--SELECTION SORT BY GROUP--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
     Student *studs = getStudentArray(stud_count);
 
     selectionSortGroup(studs, stud_count);
 
-    txtWhatOp(9);
-    txtTable();
-    txtOutputArray(studs, stud_count);
-    txtSpace();
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "--SELECTION SORT BY GROUP--\n");
+    txtTable(txt);
+    txtOutputArray(txt, studs, stud_count);
+    fprintf(txt, "\n");
+    fclose(txt);
     
     printTable();
     printStudentArray(studs, stud_count);
@@ -586,8 +549,9 @@ void searchGroup(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--BINARY SEARCH BY GROUP--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
 
@@ -600,18 +564,21 @@ void searchGroup(){
     int group_index = binarySearch(studs, stud_count, find_group);
 
     if(group_index != -1){
+        FILE *txt = fopen("log.txt", "at");
         printTable();
-        txtWhatOp(7);
-        txtTable();
+        fprintf(txt, "--BINARY SEARCH BY GROUP--\n");
+        txtTable(txt);
         for(int i = group_index; studs[i].group == find_group; i++){
-            txtOutputStudent(studs[i]);
+            txtOutputStudent(txt, studs[i]);
             printStudent(&studs[i]);
         }
-        txtSpace();
+        fprintf(txt, "\n");
+        fclose(txt);
     }
     else{
-        txtWhatOp(14);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--BINARY SEARCH BY GROUP--\nGroup %d students not found\n\n", find_group);
+        fclose(txt);
         cout << "No such student\n";
     }
 
@@ -645,10 +612,12 @@ void sortAvScore(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--INSERTION SORT BY AV. SCORE--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
+
     Student *studs = getStudentArray(stud_count);
     for(int i = 1; i < stud_count; i++){
         Student key = studs[i];
@@ -658,10 +627,12 @@ void sortAvScore(){
         studs[j+1] = key;
     }
 
-    txtWhatOp(10);
-    txtTable();
-    txtOutputArray(studs, stud_count);
-    txtSpace();
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "--INSERTION SORT BY AV. SCORE--\n");
+    txtTable(txt);
+    txtOutputArray(txt, studs, stud_count);
+    fprintf(txt, "\n");
+    fclose(txt);
 
     printTable();
     printStudentArray(studs, stud_count);
@@ -674,17 +645,22 @@ void sortName(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--QUICK SORT BY NAME--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
+
     Student *studs = getStudentArray(stud_count);
     quicksort(studs, 0, stud_count-1);
 
-    txtWhatOp(8);
-    txtTable();
-    txtOutputArray(studs, stud_count);
-    txtSpace();
+    FILE *txt = fopen("log.txt", "at");
+    fprintf(txt, "--QUICK SORT BY NAME--\n");
+    txtTable(txt);
+    txtOutputArray(txt, studs, stud_count);
+    fprintf(txt, "\n");
+    fclose(txt);
+
     printTable();
     printStudentArray(studs, stud_count);
     cout << endl;
@@ -723,8 +699,9 @@ void specialSearch(){
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--SPECIAL SEARCH--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
 
@@ -741,22 +718,26 @@ void specialSearch(){
         for(int i = group_index; studs[i].group == find_group; i++)
             groupmates_count++;
         quicksort(studs, group_index, group_index + groupmates_count - 1);
-
+        
+        FILE *txt = fopen("log.txt", "at");
         printTable();
-        txtWhatOp(11);
-        txtTable();
+        fprintf(txt, "--SPECIAL SEARCH--\n");
+        txtTable(txt);
         for(int i = group_index; studs[i].group == find_group; i++){
             if(studs[i].score > find_score && studs[i].activist){
                 success = true;
-                txtOutputStudent(studs[i]);
+                txtOutputStudent(txt, studs[i]);
                 printStudent(&studs[i]);
             }
         }
-        txtSpace();
+        fprintf(txt, "\n");
+        fclose(txt);
     }
+
     if(!success){
-        txtWhatOp(16);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--SPECIAL SEARCH--\nNo %d group student with %.2f av. score\n\n", find_group, find_score);
+        fclose(txt);
         cout << "No such student\n";
     }
     cout << endl;
@@ -768,8 +749,9 @@ void getStats() {
     int stud_count = getStudentCount();
     if (stud_count == 0) {
         cout << "Database is empty\n";
-        txtWhatOp(0);
-        txtSpace();
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--QUEUE TO DORM--\nDatabase is empty\n\n");
+        fclose(txt);
         return;
     }
 
@@ -786,9 +768,10 @@ void getStats() {
     insertionSortByPriority(studs, stud_count, min_salary);
 
     cout << "Priority list for dormitory:\n";
+    FILE *txt = fopen("log.txt", "at");
     printTable();
-    txtWhatOp(12);
-    txtTable();
+    fprintf(txt, "--QUEUE TO DORM--\n");
+    txtTable(txt);
     
     int privileged_count = 0;
     for (int i = 0; i < stud_count; i++) {
@@ -796,11 +779,10 @@ void getStats() {
             privileged_count++;
         }
         printStudent(&studs[i]);
-        txtOutputStudent(studs[i]);
+        txtOutputStudent(txt, studs[i]);
     }
     
     cout << "Number of privileged students: " << privileged_count << endl << endl;
-    FILE *txt = fopen("log.txt", "at");
     fprintf(txt, "Privileged students: %d\n\n", privileged_count);
     fclose(txt);
     delete[] studs;
