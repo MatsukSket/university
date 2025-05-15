@@ -304,6 +304,7 @@ void deleteStudent(){
 
     fclose(file);
     delete[] studs;
+    
     if(success){
         FILE *txt = fopen("log.txt", "at");
         fprintf(txt, "--DELETE STUDENT--\nStudent was deleted\n\n");

@@ -21,13 +21,13 @@ void addStudent();
 void printAll();
 void editStudent();
 void deleteStudent();
-void searchName();
-void searchGroup();
-void sortName();
-void sortGroup();
-void sortAvScore();
-void specialSearch();
-void getStats();
+void searchName();      // linear
+void searchGroup();     // binary
+void sortName();        // quicksort
+void sortGroup();       // selection
+void sortAvScore();     // insertion
+void specialSearch();   
+void getStats();        
 
 // input/output
 void inputStudentInfo(Student *stud);

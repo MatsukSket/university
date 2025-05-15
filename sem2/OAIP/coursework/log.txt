@@ -410,3 +410,36 @@ Lebedeva Maria Alekseevna               345678          8,00             no     
 Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
 Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
 
+--START THE PROGRAM--
+
+--START THE PROGRAM--
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--CLOSE THE PROGRAM--
+
