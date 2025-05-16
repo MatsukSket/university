@@ -7,6 +7,7 @@
 #include <limits>
 #include <cstdio>   
 
+
 struct Student {
     char name[40];
     int group;
@@ -15,7 +16,8 @@ struct Student {
     int income;
 };
 
-// main functions
+
+// ----- MAIN FUNCTIONS ---- //
 void createFile();
 void addStudent();
 void printAll();
@@ -29,29 +31,36 @@ void sortAvScore();     // insertion
 void specialSearch();   
 void getStats();        
 
-// input/output
-void inputStudentInfo(Student *stud);
-void printStudent(Student *stud);
-void printTable();
+
+// ------------------ INPUT/OUTPUT ------------------- //
+// console
 int inputNewGroup();
 float inputNewScore();
 bool inputNewActivist();
-void writeStudentArray(Student *studs, int stud_count);
+int inputNewIncome();
+void inputStudentInfo(Student *stud);
+void printTable();
+void printStudent(Student *stud);
+// bin file
 Student *getStudentArray(int stud_count);
-void txtOutputStudent(FILE *txt, Student &student);
-void txtTable(FILE *txt);
-void txtOutputArray(FILE *txt, Student *studs, int stud_count);
-
-// helper functions
+void writeStudentArray(Student *studs, int stud_count);
 int getStudentCount();
-int strComp(char *first, char *second);
-int nameComp(char *first, char *second);
-Student *findStudentName(Student *studs, char *name, int stud_count);
-void selectionSortGroup(Student *studs, int stud_count);
-void quicksort(Student *studs, int low, int high);
-int partition(Student *studs, int low, int high);
-int binarySearch(Student *studs, int stud_count, int find_group);
+// logging
+void logTable(FILE *txt);
+void logOutputStudent(FILE *txt, Student &student);
+void logOutputArray(FILE *txt, Student *studs, int stud_count);
+
+
+// ------------------------ HELPER FUNCTIONS ----------------------------- //
+// search
+Student *findStudentByName(Student *studs, char *name, int stud_count);
+int binarySearchByGroup(Student *studs, int stud_count, int find_group);
+// sort
+void quicksortByName(Student *studs, int low, int high);
+void selectionSortByGroup(Student *studs, int stud_count);
 void insertionSortByPriority(Student* studs, int count, int min_salary);
+// compare
+int nameComp(char *first, char *second);
 bool comparePriority(const Student& a, const Student& b, int min_salary);
 
 #endif

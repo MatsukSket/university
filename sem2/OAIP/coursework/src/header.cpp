@@ -30,8 +30,8 @@ void addStudent(){
     cout << "Student was added\n\n";
     FILE *txt = fopen("log.txt", "at");
     fprintf(txt, "--ADD STUDENT--\n");
-    txtTable(txt);
-    txtOutputStudent(txt, new_stud);
+    logTable(txt);
+    logOutputStudent(txt, new_stud);
     fprintf(txt, "\n");
     fclose(txt);
 }
@@ -41,12 +41,12 @@ int inputNewGroup(){
     cout << "Group number (6 digits): ";
     while (true) {
         cin >> group;
-        if (100000 <= group && group <= 999999)
-            return group;
-        
-        cout << "Error. Enter 6 digits\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (cin.fail() || group < 100000 || 999999 < group){
+            cout << "Error. Enter 6 digits: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else
+            return group;   
     }
 }
 
@@ -55,26 +55,40 @@ float inputNewScore(){
     cout << "Enter average score (0 - 10): ";
     while (true) {
         cin >> score;
-        if (0.0 <= score && score <= 10.0)
+        if (cin.fail() || score < 0.0 || score > 10.0){
+            cout << "Error. Enter number from 0 to 10: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else
             return score;
-        
-        cout << "Error. Enter number from 0 to 10\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 }
 
 bool inputNewActivist(){
     char activist;
+    cout << "Activist? (1 - yes, 0 - no): ";
     while (true) {
-        cout << "Activist? (1 - yes, 0 - no): ";
         cin >> activist;
-        if (activist == '1') return true;
-        if (activist == '0') return false;
-        
-        cout << "Error. Enter 1 or 0\n";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (cin.fail() || activist != 1 || activist != 0){
+            cout << "Error. Enter 1 or 0: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else 
+            return activist == 1;
+    }
+}
+
+int inputNewIncome(){
+    int income;
+    cout << "Income per family member: ";
+    while (true) {
+        cin >> income;
+        if(cin.fail() || income < 0){
+            cout << "Error, enter integer: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        } else
+            return income;
     }
 }
 
@@ -106,13 +120,7 @@ void inputStudentInfo(Student* stud) {
     stud->group = inputNewGroup();
     stud->score = inputNewScore();
     stud->activist = inputNewActivist();
-    
-    cout << "Income per family member: ";
-    while (!(cin >> stud->income) || stud->income < 0) {
-        cout << "Error, enter integer: ";
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    }
+    stud->income = inputNewIncome();
     
     printTable();
     printStudent(stud);
@@ -140,10 +148,10 @@ void printAll(){
     FILE *txt = fopen("log.txt", "at");
     printTable();
     fprintf(txt, "--PRINT ALL--\n");
-    txtTable(txt);
+    logTable(txt);
     while(fread(&stud, sizeof(Student), 1, file)){
         printStudent(&stud);
-        txtOutputStudent(txt, stud);
+        logOutputStudent(txt, stud);
     }
     cout << endl;
     fprintf(txt, "\n");
@@ -175,7 +183,7 @@ void writeStudentArray(Student *studs, int stud_count){
     fclose(file);
 }
 
-int strComp(char *first, char *second) {
+int nameComp(char *first, char *second) {
     if (!first || !second) 
         return (!first && !second) ? 0 : ((!first) ? -1 : 1);
 
@@ -184,11 +192,11 @@ int strComp(char *first, char *second) {
 
     while (true) {
         if (*first == ' ' && wordStartFirst) {
-            ++first;
+            first++;
             continue;
         }
         if (*second == ' ' && wordStartSecond) {
-            ++second;
+            second++;
             continue;
         }
 
@@ -198,7 +206,6 @@ int strComp(char *first, char *second) {
         if (*first == '\0' || *second == '\0') 
             return (*first == '\0' && *second == '\0') ? 0 : ((*first == '\0') ? -1 : 1);
         
-
         if (*first != *second) {
             return (*first > *second) ? 1 : -1;
         }
@@ -224,7 +231,7 @@ void editStudent(){
     cout << "Enter student name for edit: ";
     cin.getline(editName, 40);
 
-    Student *studentForEdit = findStudentName(studs, editName, stud_count);
+    Student *studentForEdit = findStudentByName(studs, editName, stud_count);
 
     FILE *txt = fopen("log.txt", "at");
     if (studentForEdit != nullptr) {
@@ -233,13 +240,13 @@ void editStudent(){
         printStudent(studentForEdit);
         
         fprintf(txt, "--EDIT STUDENT--\nEdited student:\n");
-        txtTable(txt);
-        txtOutputStudent(txt, *studentForEdit);
+        logTable(txt);
+        logOutputStudent(txt, *studentForEdit);
 
         cout << "\nEnter new info:\n";
         inputStudentInfo(studentForEdit);
         
-        txtOutputStudent(txt, *studentForEdit);
+        logOutputStudent(txt, *studentForEdit);
         fprintf(txt, "\n");
 
         writeStudentArray(studs, stud_count);
@@ -270,9 +277,9 @@ int getStudentCount(){
     return file_size / sizeof(Student);
 }
 
-Student *findStudentName(Student *studs, char *name, int stud_count){
+Student *findStudentByName(Student *studs, char *name, int stud_count){
     for(int i = 0; i < stud_count; i++)
-        if(strComp(studs[i].name, name) == 0)
+        if(nameComp(studs[i].name, name) == 0)
             return &studs[i];
     return nullptr;
 }
@@ -295,7 +302,7 @@ void deleteStudent(){
     FILE *file = fopen("students.bin", "wb");
 
     for(int i = 0; i < stud_count; i++){
-        if(strComp(studs[i].name, deleteName) == 0){
+        if(nameComp(studs[i].name, deleteName) == 0){
             success = true;
             continue;
         }
@@ -336,15 +343,15 @@ void searchName(){
     
     FILE *txt;
     for(int i = 0; i < stud_count; i++){
-        if(strComp(studs[i].name, findName) == 0){
+        if(nameComp(studs[i].name, findName) == 0){
             if(!success){
                 txt = fopen("log.txt", "at");
                 fprintf(txt, "--LINEAR SEARCH BY NAME--\n");
-                txtTable(txt);
+                logTable(txt);
                 printTable();
             } 
             printStudent(&studs[i]);
-            txtOutputStudent(txt, studs[i]);
+            logOutputStudent(txt, studs[i]);
             success = true;
         }
     }
@@ -359,17 +366,17 @@ void searchName(){
     fclose(txt);
 }
 
-void txtOutputStudent(FILE *txt, Student &student){
+void logOutputStudent(FILE *txt, Student &student){
     fprintf(txt, "%-40s%-10d%10.2f%15s%20d\n", student.name, student.group, student.score, (student.activist) ? "yes" : "no", student.income);
 }
 
-void txtTable(FILE *txt){
+void logTable(FILE *txt){
     fprintf(txt, "%-40s%-10s%10s%15s%20s\n", " name", "group", "av. score", "activist", "income");
 }
 
-void txtOutputArray(FILE *txt, Student *studs, int stud_count){
+void logOutputArray(FILE *txt, Student *studs, int stud_count){
     for(int i = 0; i < stud_count; i++)
-        txtOutputStudent(txt, studs[i]);
+        logOutputStudent(txt, studs[i]);
 }
 
 void sortGroup(){
@@ -383,12 +390,12 @@ void sortGroup(){
     }
     Student *studs = getStudentArray(stud_count);
 
-    selectionSortGroup(studs, stud_count);
+    selectionSortByGroup(studs, stud_count);
 
     FILE *txt = fopen("log.txt", "at");
     fprintf(txt, "--SELECTION SORT BY GROUP--\n");
-    txtTable(txt);
-    txtOutputArray(txt, studs, stud_count);
+    logTable(txt);
+    logOutputArray(txt, studs, stud_count);
     fprintf(txt, "\n");
     fclose(txt);
     
@@ -399,7 +406,7 @@ void sortGroup(){
     delete[] studs;
 }
 
-void selectionSortGroup(Student *studs, int stud_count){
+void selectionSortByGroup(Student *studs, int stud_count){
     for(int i = 0; i < stud_count - 1; i++){
         int minIndex = i;
 
@@ -426,20 +433,20 @@ void searchGroup(){
     }
 
     Student *studs = getStudentArray(stud_count);
-    selectionSortGroup(studs, stud_count);
+    selectionSortByGroup(studs, stud_count);
 
     int find_group = inputNewGroup();
     cin.ignore();
 
-    int group_index = binarySearch(studs, stud_count, find_group);
+    int group_index = binarySearchByGroup(studs, stud_count, find_group);
 
     if(group_index != -1){
         FILE *txt = fopen("log.txt", "at");
         printTable();
         fprintf(txt, "--BINARY SEARCH BY GROUP--\n");
-        txtTable(txt);
+        logTable(txt);
         for(int i = group_index; studs[i].group == find_group; i++){
-            txtOutputStudent(txt, studs[i]);
+            logOutputStudent(txt, studs[i]);
             printStudent(&studs[i]);
         }
         fprintf(txt, "\n");
@@ -456,26 +463,22 @@ void searchGroup(){
     delete[] studs;
 }
 
-int binarySearch(Student *studs, int stud_count, int find_group){
-    int left = 0;
-    int right = stud_count - 1;
-
-    while(left <= right) {
-        int mid = left + (right - left) / 2;
-
-        if(studs[mid].group == find_group){
-            int start = mid;
-            while (start > 0 && studs[start - 1].group == find_group)
-                start--;
-            return start;
+int binarySearchByGroup(Student *studs, int stud_count, int find_group){
+    int start = 0;
+    int len = stud_count;
+    while(len > 0) {
+        int half = len / 2;
+        if (studs[start + half].group < find_group) {
+            start += half + 1;
+            len -= half + 1;
         }
-        else if (studs[mid].group < find_group)
-            left = mid + 1;
-        else 
-            right = mid - 1;
+        else
+            len = half;
     }
-
-    return -1;
+    if (start < stud_count && studs[start].group == find_group)
+        return start;
+    else
+        return -1;
 }
 
 void sortAvScore(){
@@ -499,8 +502,8 @@ void sortAvScore(){
 
     FILE *txt = fopen("log.txt", "at");
     fprintf(txt, "--INSERTION SORT BY AV. SCORE--\n");
-    txtTable(txt);
-    txtOutputArray(txt, studs, stud_count);
+    logTable(txt);
+    logOutputArray(txt, studs, stud_count);
     fprintf(txt, "\n");
     fclose(txt);
 
@@ -522,12 +525,12 @@ void sortName(){
     }
 
     Student *studs = getStudentArray(stud_count);
-    quicksort(studs, 0, stud_count-1);
+    quicksortByName(studs, 0, stud_count-1);
 
     FILE *txt = fopen("log.txt", "at");
     fprintf(txt, "--QUICK SORT BY NAME--\n");
-    txtTable(txt);
-    txtOutputArray(txt, studs, stud_count);
+    logTable(txt);
+    logOutputArray(txt, studs, stud_count);
     fprintf(txt, "\n");
     fclose(txt);
 
@@ -538,31 +541,25 @@ void sortName(){
     delete[] studs;
 }
 
-void quicksort(Student *studs, int low, int high){
-    if(low < high){
-        int pivotIndex = partition(studs, low, high);
-        quicksort(studs, low, pivotIndex - 1);
-        quicksort(studs, pivotIndex + 1, high);
-    }
-}
-
-int partition(Student *studs, int low, int high){
-    Student pivot = studs[high];
-    int i = low - 1;
-
-    for(int j = low; j < high; j++){
-        if(strComp(studs[j].name, pivot.name) <= 0){
-            i++;
-            Student temp = studs[i];
-            studs[i] = studs[j];
-            studs[j] = temp;
+void quicksortByName(Student *studs, int l, int r){
+    Student pivot = studs[(l+r) / 2], temp_stud;
+    int lt = l, rt = r; // left temp & right temp
+    do {
+        while(nameComp(studs[lt].name, pivot.name) < 0)    lt++;
+        while(nameComp(studs[rt].name, pivot.name) > 0)    rt--;
+        if(lt <= rt){
+            temp_stud = studs[lt];
+            studs[lt] = studs[rt];
+            studs[rt] = temp_stud;
+            lt++;
+            rt--;
         }
-    }
+    } while(lt <= rt);
 
-    Student temp = studs[i + 1];
-    studs[i + 1] = studs[high];
-    studs[high] = temp;
-    return i + 1;
+    if (l < rt) 
+        quicksortByName(studs, l, rt);
+    if (lt < r) 
+        quicksortByName(studs, lt, r);
 }
 
 void specialSearch(){
@@ -576,27 +573,27 @@ void specialSearch(){
     }
 
     Student *studs = getStudentArray(stud_count);
-    selectionSortGroup(studs, stud_count);
+    selectionSortByGroup(studs, stud_count);
 
     int find_group = inputNewGroup();   cin.ignore();
     float find_score = inputNewScore();
-    int group_index = binarySearch(studs, stud_count, find_group);
+    int group_index = binarySearchByGroup(studs, stud_count, find_group);
     bool success = false;
 
     if(group_index != -1){
         int groupmates_count = 0;
         for(int i = group_index; studs[i].group == find_group; i++)
             groupmates_count++;
-        quicksort(studs, group_index, group_index + groupmates_count - 1);
+        quicksortByName(studs, group_index, group_index + groupmates_count - 1);
         
         FILE *txt = fopen("log.txt", "at");
         printTable();
         fprintf(txt, "--SPECIAL SEARCH--\n");
-        txtTable(txt);
+        logTable(txt);
         for(int i = group_index; studs[i].group == find_group; i++){
             if(studs[i].score > find_score && studs[i].activist){
                 success = true;
-                txtOutputStudent(txt, studs[i]);
+                logOutputStudent(txt, studs[i]);
                 printStudent(&studs[i]);
             }
         }
@@ -641,7 +638,7 @@ void getStats() {
     FILE *txt = fopen("log.txt", "at");
     printTable();
     fprintf(txt, "--QUEUE TO DORM--\n");
-    txtTable(txt);
+    logTable(txt);
     
     int privileged_count = 0;
     for (int i = 0; i < stud_count; i++) {
@@ -649,7 +646,7 @@ void getStats() {
             privileged_count++;
         }
         printStudent(&studs[i]);
-        txtOutputStudent(txt, studs[i]);
+        logOutputStudent(txt, studs[i]);
     }
     
     cout << "Number of privileged students: " << privileged_count << endl << endl;

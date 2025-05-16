@@ -443,3 +443,534 @@ Tikhonova Elizaveta Andreevna           567890          8,50             no     
 
 --CLOSE THE PROGRAM--
 
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--START THE PROGRAM--
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Morozova Polina Denisovna               123456          6,80             no                 700
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Morozova Polina Denisovna               123456          6,80             no                 700
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--START THE PROGRAM--
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Morozova Polina Denisovna               123456          6,80             no                 700
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Morozova Polina Denisovna               123456          6,80             no                 700
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--START THE PROGRAM--
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Morozova Polina Denisovna               123456          6,80             no                 700
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Petrova Anna Sergeevna                  333333          2,00            yes                 890
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Petrova Anna Sergeevna                  333333          2,00            yes                 890
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Morozova Polina Denisovna               123456          6,80             no                 700
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Petrova Anna Sergeevna                  333333          2,00            yes                 890
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+aaa                                     321231          1,00            yes                   1
+
+--CREATE FILE--
+New file was created
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+aaa                                     111111          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+1                                       111111          1,00            yes                   1
+
+--CREATE FILE--
+New file was created
+
+--START THE PROGRAM--
+
+--CREATE FILE--
+New file was created
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+c                                       123456          1,00            yes                   1
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+d                                       123123          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+f                                       123123          1,00            yes                   1
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+f                                       123123          1,00            yes                   1
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+f                                       123123          1,00            yes                   1
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+f                                       123123          1,00            yes                   1
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+f                                       123123          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+a                                       123123          1,00            yes                   1
+
+--DELETE STUDENT--
+Student was deleted
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+
+--BINARY SEARCH BY GROUP--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+
+--BINARY SEARCH BY GROUP--
+ name                                   group      av. score       activist              income
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+e                                       888888          1,00            yes                   1
+
+--BINARY SEARCH BY GROUP--
+ name                                   group      av. score       activist              income
+e                                       888888          1,00            yes                   1
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--BINARY SEARCH BY GROUP--
+ name                                   group      av. score       activist              income
+e                                       888888          1,00            yes                   1
+
+--QUICK SORT BY NAME--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+e                                       888888          1,00            yes                   1
+
+--BINARY SEARCH BY GROUP--
+ name                                   group      av. score       activist              income
+a                                       123456          1,00            yes                   1
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+
+--BINARY SEARCH BY GROUP--
+ name                                   group      av. score       activist              income
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+ãã                                      222222          0,00            yes                  23
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+e                                       888888          1,00            yes                   1
+ãã                                      222222          0,00            yes                  23
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+ff                                      111111          0,00            yes                  12
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+re                                      123123          0,00            yes              321321
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+b                                       123456          1,00            yes                   1
+c                                       123456          1,00            yes                   1
+a                                       123456          1,00            yes                   1
+d                                       123123          1,00            yes                   1
+a                                       123123          1,00            yes                   1
+e                                       888888          1,00            yes                   1
+ãã                                      222222          0,00            yes                  23
+ff                                      111111          0,00            yes                  12
+re                                      123123          0,00            yes              321321
+
