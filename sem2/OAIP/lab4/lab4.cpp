@@ -6,8 +6,8 @@ class Set{
 private:
     class Node{
     public:
-        char symbol = NULL;
-        float value = NULL;
+        char symbol = '\0';
+        float value = 0;
         Node *next = nullptr;
     };
     Node *head = nullptr;

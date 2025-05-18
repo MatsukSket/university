@@ -65,11 +65,11 @@ float inputNewScore(){
 }
 
 bool inputNewActivist(){
-    char activist;
+    int activist;
     cout << "Activist? (1 - yes, 0 - no): ";
     while (true) {
         cin >> activist;
-        if (cin.fail() || activist != 1 || activist != 0){
+        if (cin.fail() || (activist != 1 && activist != 0)){
             cout << "Error. Enter 1 or 0: ";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -163,8 +163,11 @@ void printAll(){
 Student *getStudentArray(int stud_count){
     FILE *file = fopen("students.bin", "rb");
     if(!file){
-        cout << "File read error!\n";
-        return nullptr;
+        cout << "File open error!\n\n";
+        FILE *txt = fopen("log.txt", "at");
+        fprintf(txt, "--FILE OPEN ERROR--\n\n");
+        fclose(txt);
+        return 0;
     }
 
     Student *studs = new Student[stud_count];
@@ -187,22 +190,10 @@ int nameComp(char *first, char *second) {
     if (!first || !second) 
         return (!first && !second) ? 0 : ((!first) ? -1 : 1);
 
-    bool wordStartFirst = true;
-    bool wordStartSecond = true;
+    while (*first == ' ') first++;
+    while (*second == ' ') second++;
 
     while (true) {
-        if (*first == ' ' && wordStartFirst) {
-            first++;
-            continue;
-        }
-        if (*second == ' ' && wordStartSecond) {
-            second++;
-            continue;
-        }
-
-        wordStartFirst = (*first == ' ');
-        wordStartSecond = (*second == ' ');
-
         if (*first == '\0' || *second == '\0') 
             return (*first == '\0' && *second == '\0') ? 0 : ((*first == '\0') ? -1 : 1);
         

@@ -56,9 +56,9 @@ void logOutputArray(FILE *txt, Student *studs, int stud_count);
 Student *findStudentByName(Student *studs, char *name, int stud_count);
 int binarySearchByGroup(Student *studs, int stud_count, int find_group);
 // sort
-void quicksortByName(Student *studs, int low, int high);
 void selectionSortByGroup(Student *studs, int stud_count);
 void insertionSortByPriority(Student* studs, int count, int min_salary);
+void quicksortByName(Student *studs, int low, int high);
 // compare
 int nameComp(char *first, char *second);
 bool comparePriority(const Student& a, const Student& b, int min_salary);
