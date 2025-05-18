@@ -55,7 +55,7 @@
 
 ## <p align="center">Результаты Тестирования:</p>
 
-![Снимок экрана от 2025-05-01 13-03-59](https://github.com/user-attachments/assets/ec559969-3e1c-4363-b77a-d1a2d4cb81ae).
+![Снимок экрана от 2025-05-01 13-03-59](https://github.com/MatsukSket/university/blob/e4c20ac467928e4f7d2fe66f0eccbbe96661eb90/sem2/PIOIVIS/lab2/2025-05-18_16-50.png).
 
 ## <p align="center">Выводы:</p>
 
