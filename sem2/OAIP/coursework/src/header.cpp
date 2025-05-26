@@ -353,6 +353,8 @@ void searchName(){
         txt = fopen("log.txt", "at");
         fprintf(txt, "--LINEAR SEARCH BY NAME--\nStudent %s not found\n\n", findName);
     }
+    else
+        fprintf(txt, "\n");
     cout << endl;
     fclose(txt);
 }

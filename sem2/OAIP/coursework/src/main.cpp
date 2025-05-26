@@ -7,7 +7,7 @@ int main() {
     FILE *txt = fopen("log.txt", "at");
     fprintf(txt, "--START THE PROGRAM--\n\n");
     fclose(txt);
-    int what_to_do;
+    int choise;
     bool end_program = false;
     
     do {
@@ -27,10 +27,10 @@ int main() {
                 "0 - Exit\n";
 
         cout << "Enter the number: ";
-        cin >> what_to_do;
+        cin >> choise;
         cin.ignore();
         
-        switch (what_to_do) {
+        switch (choise) {
         case 1:
             createFile();
             break;
@@ -75,6 +75,9 @@ int main() {
             break;
         default:
             cout << "Unknown operation!\n";
+            txt = fopen("log.txt", "at");
+            fprintf(txt, "--UNKNOWN OPERATION--\n\n");
+            fclose(txt);
             break;
         }
     } while (!end_program);
