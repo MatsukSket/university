@@ -670,3 +670,51 @@ bool comparePriority(const Student& a, const Student& b, int min_salary) {
         
     return !a.activist && b.activist;
 }
+
+void printAdd(Student* stud) {
+    cout << "   ";
+    cout << setw(40) << left << stud->name 
+        << setw(10) << right << fixed << setprecision(2) << stud->score
+        << setw(15) << right << (stud->activist ? "yes" : "no") 
+        << setw(20) << right << stud->income << endl;
+}
+
+void sortAddTask(Student *studs, int count){
+    for (int i = 1; i < count; i++) {
+        Student key = studs[i];
+        int j;
+        for (j = i - 1; j >= 0 && myComp(studs[j], key) > 0; j--)
+            studs[j + 1] = studs[j];
+        studs[j + 1] = key;
+    }
+}
+
+void addictionalTask() {
+    int stud_count = getStudentCount();
+    Student* studs = getStudentArray(stud_count);
+
+    bool newGroup = false;
+    sortAddTask(studs, stud_count);
+
+    cout << studs[0].group << endl;
+    printAdd(&studs[0]);
+    for(int i = 1; i < stud_count; i++){
+        if(studs[i].group != studs[i-1].group)
+            newGroup = true;
+        if(newGroup){
+            cout << studs[0].group << endl;
+            newGroup = false;
+        }
+        if(studs[i].activist)
+            printAdd(&studs[i]);
+    }
+    
+    delete[] studs;
+}
+
+int myComp(Student &a, Student &b) {
+    if (a.group != b.group) 
+        return a.group - b.group;
+
+    return nameComp(a.name, b.name);
+}

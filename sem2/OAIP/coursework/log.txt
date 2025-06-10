@@ -258,3 +258,329 @@ Volkova Olga Nikolaevna                 123456          6,80             no     
 Vorobyov Igor Anatolievich              456789          7,20             no                1000
 Zaitsev Denis Olegovich                 234567          7,20            yes                1050
 
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Kishko Vlad                             123123          2,00            yes                   1
+Kishko Danila                           123123          1,00            yes                   1
+Kishko Ara                              123123          1,00            yes                   1
+
+--DELETE STUDENT--
+Student was deleted
+
+--DELETE STUDENT--
+Student was deleted
+
+--DELETE STUDENT--
+Student was deleted
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--QUEUE TO DORM--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Privileged students: 9
+
+--SPECIAL SEARCH--
+No 123123 group student with 7,00 av. score
+
+--SELECTION SORT BY GROUP--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Morozova Polina Denisovna               123456          6,80             no                 700
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--CREATE FILE--
+New file was created
+
+--UNKNOWN OPERATION--
+
+--SPECIAL SEARCH--
+Database is empty
+
+--UNKNOWN OPERATION--
+
+--SPECIAL SEARCH--
+Database is empty
+
+--PRINT ALL--
+Database is empty
+
+--START THE PROGRAM--
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Morozova Polina Denisovna               123456          6,80             no                 700
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+
+--ADD STUDENT--
+ name                                   group      av. score       activist              income
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--SELECTION SORT BY GROUP--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Morozova Polina Denisovna               123456          6,80             no                 700
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--SPECIAL SEARCH--
+ name                                   group      av. score       activist              income
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--UNKNOWN OPERATION--
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--START THE PROGRAM--
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--PRINT ALL--
+ name                                   group      av. score       activist              income
+Ivanov Ivan Ivanovich                   123456          7,20            yes                 850
+Petrova Anna Sergeevna                  234567          8,50             no                1200
+Sidorov Mikhail Dmitrievich             345678          7,20             no                 950
+Kozlova Ekaterina Andreevna             456789          9,10            yes                1100
+Smirnov Artyom Vadimovich               567890          8,50            yes                1300
+Volkova Olga Nikolaevna                 123456          6,80             no                 750
+Zaitsev Denis Olegovich                 234567          7,20            yes                1050
+Pavlova Vera Aleksandrovna              345678          8,00             no                1400
+Fedorov Grigory Igorevich               456789          8,50             no                1250
+Orlova Daria Romanovna                  567890          7,20            yes                 900
+Belova Anastasia Pavlovna               123456          9,10             no                1150
+Gusev Maxim Viktorovich                 234567          6,80            yes                 800
+Titova Alina Konstantinovna             345678          8,00            yes                1500
+Vorobyov Igor Anatolievich              456789          7,20             no                1000
+Sokolov Nikita Valeryevich              567890          8,50            yes                1350
+Morozova Polina Denisovna               123456          6,80             no                 700
+Kuznetsov Daniil Sergeevich             234567          9,10            yes                1600
+Lebedeva Maria Alekseevna               345678          8,00             no                1450
+Polyakov Alexander Dmitrievich          456789          7,20            yes                 950
+Tikhonova Elizaveta Andreevna           567890          8,50             no                1550
+
+--CLOSE THE PROGRAM--
+
+--START THE PROGRAM--
+
+--DELETE STUDENT--
+Student was deleted
+

@@ -24,6 +24,7 @@ int main() {
                 "10 - Insertion sort by av. score\n"
                 "11 - Special search\n"
                 "12 - Complete task\n"
+                "13 - Addictional task\n"
                 "0 - Exit\n";
 
         cout << "Enter the number: ";
@@ -66,6 +67,9 @@ int main() {
             break;
         case 12:
             getStats();
+            break;
+        case 13:
+            addictionalTask();
             break;
         case 0:
             end_program = true;

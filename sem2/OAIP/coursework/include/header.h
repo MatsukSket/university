@@ -29,6 +29,7 @@ void sortName();        // quicksort
 void sortGroup();       // selection
 void sortAvScore();     // insertion
 void specialSearch();   
+void addictionalTask();
 void getStats();        
 
 
@@ -41,6 +42,7 @@ int inputNewIncome();
 void inputStudentInfo(Student *stud);
 void printTable();
 void printStudent(Student *stud);
+void printStudentArray(Student *studs, int stud_count);
 // bin file
 Student *getStudentArray(int stud_count);
 void writeStudentArray(Student *studs, int stud_count);
@@ -59,8 +61,10 @@ int binarySearchByGroup(Student *studs, int stud_count, int find_group);
 void selectionSortByGroup(Student *studs, int stud_count);
 void insertionSortByPriority(Student* studs, int count, int min_salary);
 void quicksortByName(Student *studs, int low, int high);
+void sortAddTask(Student *studs, int count);
 // compare
 int nameComp(char *first, char *second);
 bool comparePriority(const Student& a, const Student& b, int min_salary);
+int myComp(Student &a, Student &b);
 
 #endif
