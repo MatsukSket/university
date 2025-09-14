@@ -6,6 +6,18 @@ int getRandom(){
     return rand() % 10;
 }
 
+struct Steck {
+    int val;
+    Steck* next;
+};
+Steck* hed;
+
+void create (){
+    
+}
+
+
+
 class Stack{
 private:
     class Node{

@@ -285,6 +285,7 @@ Stack <char> get_rpn(char* str){
             rpn.push(str[i]);
             continue;
         }
+        
         if(isMath(str[i])){
             while(!symbols.isEmpty() && symbol_priority(str[i]) <= symbol_priority(symbols.top())){
                 rpn.push(symbols.top());
