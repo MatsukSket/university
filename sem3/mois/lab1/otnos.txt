@@ -1,0 +1,32 @@
+nrel_api_interraction
+=> nrel_main_idtf:
+    [взаимодействие через API*]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_main_idtf:
+    [API interraction*]
+    (*
+        <- lang_en;;
+    *);
+=> nrel_definition:
+    [Взаимодействие через API - это отношение, описывающее обмен данными и вызов функций между программными компонентами через определённый программный интерфейс.*]
+    (*
+        <- lang_ru;;
+    *);
+<= nrel_inclusion:
+    concept_system_component;
+=> nrel_first_domain:
+    concept_API_client;
+=> nrel_second_domain:
+    concept_API_server;
+=> nrel_definition_domain:
+    ...
+    (*
+        <= nrel_set_union: {
+            concept_API_client;
+            concept_API_server;
+        };;
+    *);
+<- rrel_explored_relation:
+    subject_domain_of_programm_system_architecture;;
