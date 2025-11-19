@@ -1,7 +1,7 @@
 rrel_component
 <- sc_node_role_relation;
 => nrel_main_idtf:
-    [компонент']
+    [компонент' ]
     (*
         <- lang_ru;;
     *);

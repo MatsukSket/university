@@ -10,7 +10,7 @@ PresentationLayer
 
 BusinessLayer
 => nrel_main_idtf:
-    [Бизнес слой]
+    [Бизнес-слой]
     (*
         <- lang_ru;;
     *);
