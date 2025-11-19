@@ -50,6 +50,7 @@ Tree::Node* Tree::rotateRight(Node *node) {
 }
 
 Tree::Node* Tree::balance(Node* node) {
+<<<<<<< HEAD
     if(height(node) <= 2)   return node;
 
     int balance_num = getBalanceNum(node);
@@ -77,6 +78,22 @@ Tree::Node* Tree::balance(Node* node) {
         }
     }
     
+=======
+    int balance_num = getBalanceNum(node);
+
+    if(balance_num > 1) {   // слева больше
+        if (getBalanceNum(node->left) < 0)
+            node->left = rotateLeft(node->left);
+        return rotateRight(node);
+    }
+
+    if(balance_num < -1) {   // справа больше
+        if(getBalanceNum(node->right) > 0)
+            node->right = rotateRight(node->right);
+        return rotateLeft(node);
+    }
+
+>>>>>>> 32870f7 (linux after pull)
     return node;
 }
 

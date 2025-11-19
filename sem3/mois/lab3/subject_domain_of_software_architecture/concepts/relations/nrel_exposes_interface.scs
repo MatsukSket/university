@@ -1,0 +1,11 @@
+nrel_exposes_interface
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [предоставляет интерфейс* ]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_first_domain:
+    concept_component;
+=> nrel_second_domain:
+    concept_interface;;

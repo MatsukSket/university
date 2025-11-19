@@ -1,0 +1,11 @@
+OnlineStore
+<- concept_software_system;
+=> nrel_main_idtf:
+    [Интернет-магазин]
+    (*
+        <- lang_ru;;
+    *);
+-> rrel_layer:
+    PresentationLayer;
+    BusinessLayer;
+    DataAccessLayer;;

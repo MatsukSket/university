@@ -9,6 +9,7 @@ private:
         char *data;
         Node *left;
         Node *right;
+        int height = 0;
 
         Node(int key_, char *data_);
         ~Node();
