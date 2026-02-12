@@ -1,0 +1,39 @@
+WebUI
+<- concept_component;
+=> nrel_exposes_interface:
+    WebPublicAPI;
+    WebAdminAPI;;
+
+MobileAppUI
+<- concept_component;
+=> nrel_exposes_interface:
+    MobileAppPublicAPI;
+    MobileAppAdminAPI;;
+
+OrderService
+<- concept_component;
+=> nrel_exposes_interface:
+    PaymentAPI;
+    OrderProcessingAPI;;
+
+CatalogService
+<- concept_component;
+=> nrel_exposes_interface:
+    SearchAPI;
+    ProductCatalogAPI;;
+
+DatabaseAdapter
+<- concept_component;
+=> nrel_exposes_interface:
+    DataStorageAPI;;
+
+AuthorisationService
+<- concept_component;
+=> nrel_exposes_interface:
+    LogginingAPI;
+    AuthorisationAPI;;
+
+CacheAdapter
+<- concept_component;
+=> nrel_exposes_interface:
+    CacheAPI;;

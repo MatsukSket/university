@@ -1,0 +1,396 @@
+// ==========================================================================================
+// ПРОГРАММА: Программа поиска малоиспользуемых интерфесов
+// ==========================================================================================
+// НАЗНАЧЕНИЕ:
+//   Эта scp-программа ищет все интерфейсы в указанном слое,
+//   у которых количество ежедневных вызовов < 2000, и собирает их в результирующее множество.
+//
+// ВХОДНЫЕ ПАРАМЕТРЫ:
+//   .._layer - слой, в расмках которого ищутся интерфейсы.
+//
+// ВЫХОДНЫЕ ПАРАМЕТРЫ:
+//   .._result_interfaces - результирующая структура, содержащая все найденные интерфейсы с
+//						    ежедневным вызовом < 2000.
+//
+// АЛГОРИТМ:
+//   1. Создать пустое результирующее множество интерфейсов.
+//   2. Проверить, что входной аргумент - это экземпляр класса слоев.
+//   3. Найти все компоненты, принадлежащие указанному слою.
+//   4. Для каждого компонента пройти через все интерфейсы.
+//   5. Для каждого интерфейса получить его количество ежедневных вызовов.
+//   6. Если количество вызовов <= 2000, добавить интерфейс в результирующее множество.
+//   7. Очистить временные множества и вернуть результат.
+//
+// ИСПОЛЬЗУЕМЫЕ КЛЮЧЕВЫЕ SC-ЭЛЕМЕНТЫ:
+//   - concept_layer: класс слоев
+//   - nrel_component: связывает слои с компонентами
+//   - nrel_exposes_interface: связывает компоненты с интерфейсами
+//   - concept_interface: класс интерфейсов
+//   - nrel_interface_call_in_day: содержит количество ежедневных вызовов интерфейса
+//
+// ==========================================================================================
+
+program_for_searching_rarely_called_interfaces
+=> nrel_main_idtf:
+	[Программа поиска интерфесов заданного слоя, которые имеют малое (<2000) число ежедневных вызовов]
+    (*
+        <- lang_ru;;
+    *);
+	[Program for searching interfaces of specified layer with small number (<2000) of daily calls]
+    (*
+        <- lang_en;;
+    *);
+<- scp_program;
+-> rrel_key_sc_element:
+    .._process;;
+
+program_for_searching_rarely_called_interfaces = [*
+.._process
+<-_ scp_process;
+
+// ОБЪЯВЛЕНИЕ ВХОДНЫХ И ВЫХОДНЫХ ПАРАМЕТРОВ:
+_-> rrel_1:: rrel_in:: .._layer; 
+_-> rrel_2:: rrel_out:: .._result_interfaces; 
+
+<=_ nrel_decomposition_of_action:: _...
+(*
+	// ШАГ 1: ИНИЦИАЛИЗАЦИЯ РЕЗУЛЬТИРУЮЩЕЙ СТРУКТУРЫ
+	// Создать пустую структуру для добавления интерфейсов.
+	_-> rrel_1:: .._generate_result_set_of_interfaces_with_rarely_daily_calls
+	(*
+		<-_ genElStr3;;
+
+		_-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: rrel_structure:: .._result_interfaces;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_interfaces_to_class;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_const:: concept_interface;;
+
+        // Перейти к проверке входного аргумента.
+		_=> nrel_goto:: .._check_layer;;
+	*);;
+
+	// ШАГ 2: ПРОВЕРКА ВХОДНОГО АРГУМЕНТА
+	// Проверить, что входной аргумент действительно является экземпляром класса слоев.
+	_-> .._check_layer
+	(*
+		<-_ searchElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_layer;;
+		_-> rrel_2:: rrel_assign:: rrel_const_perm_pos_arc:: rrel_scp_var:: .._arc_from_class_to_layer;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._layer;;
+
+		// Если входной аргумент является экземпляром класса слоев, 
+		// то перейти к печати в терминал, что он является слоев.
+		_=> nrel_then:: .._print_that_specified_argument_is_layer;;
+		// Если входной аргумент не является экземпляром класса слоев, 
+		// то перейти к печати в терминал, что он не является слоев.
+		_=> nrel_else:: .._print_that_specified_argument_is_not_layer;;
+	*);;
+
+	// Напечатать в терминал, что входной аргумент является университетом.
+	_-> .._print_that_specified_argument_is_layer
+	(*
+		<-_ printNl;;		
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is layer];;
+
+		// Перейти к поиску всех групп в университете.
+		_=> nrel_goto:: .._search_layer_components;;
+	*);;
+
+	// ШАГ 3: ПОИСК ВСЕХ КОМПОНЕНТОВ В СЛОЕ
+	// Найти все компоненты, принадлежащие слою, сформировать множество из них и записать в .._found_components.
+	_-> .._search_layer_components
+	(*
+		<-_ searchSetStr5;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: .._layer;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_layer_to_component;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._component;;
+		_-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_layer_to_component;;
+		_-> rrel_5:: rrel_fixed:: rrel_scp_const:: rrel_component;;
+	
+		_-> rrel_set_3:: rrel_assign:: rrel_scp_var:: .._found_components;;
+
+		// Если компоненты найдены, то перейти к выбору компонента.
+		_=> nrel_then:: .._get_next_component;;
+		// Если компоненты не найдены, то перейти к печати в терминал, что все компоненты были пройдены.
+		_=> nrel_else:: .._print_that_all_components_were_iterated;;
+	*);;
+
+	// ШАГ 4: ВЫБРАТЬ КОМПОНЕНТ ИЗ МНОЖЕСТВА НАЙДЕННЫХ КОМПОНЕНТОВ
+	// Найти любой компонент во множестве найденных компонентов, являющегося значением переменной .._found_components.
+	_-> .._get_next_component
+	(*
+		<-_ searchElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._found_components;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_component_set_to_component;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: .._component;;
+
+		// Если компоненты еще остались, то перейти к удалению выбранного компонента из множества.
+		_=> nrel_then:: .._pop_component_from_set;;
+		// Если все компоненты были пройдены, то перейти к печати в терминал, что все компоненты были пройдены.
+		_=> nrel_else:: .._print_that_all_components_were_iterated;;
+	*);;
+
+	// ШАГ 5: УДАЛИТЬ ВЫБРАННЫЙ КОМПОНЕНТ ИЗ МНОЖЕСТВА НАЙДЕННЫХ КОМПОНЕНТОВ
+	// Удалить sc-дугу между множеством в .._found_components и выбранным компонентом.
+	_-> .._pop_component_from_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._arc_from_component_set_to_component;;
+
+		// Перейти к печати в терминал, что компонент успешно извлечен из множества.
+		_=> nrel_goto:: .._print_that_layer_component_was_found;;
+	*);;
+
+	// Напечатать в терминал, что компонент успешно извлечен из множества.
+	_-> .._print_that_layer_component_was_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Component was found in specified layer];;
+
+		// Перейти к поиску всех интерфейсов в выбранном компоненте.
+		_=> nrel_goto:: .._search_component_interfaces;;
+	*);;
+
+    // ШАГ 6: ПОИСК ВСЕХ ИНТЕРФЕЙСОВ В ТЕКУЩЕМ КОМПОНЕНТЕ
+	// Найти все интерфейсы одного компонента, сформировать множество из них и записать в .._found_interfaces.
+    _-> .._search_component_interfaces
+    (*
+        <-_ searchSetStr5;;
+        _-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._component;;
+        _-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_common_arc:: .._arc_from_component_to_interface;;
+        _-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._interface;;
+        _-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_component_to_interface;;
+        _-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_exposes_interface;;
+        
+        _-> rrel_set_3:: rrel_assign:: rrel_scp_var:: .._found_interfaces;;
+
+		// Если интерфейсы найдены, то перейти к выбору интерфейса.
+        _=> nrel_then:: .._get_next_interface;;
+		// Если интерфесы не найдены, то перейти к выбору следующего компонента.
+        _=> nrel_else:: .._get_next_component;;
+    *);;
+
+//	// ШАГ 6: ПОИСК ВСЕХ ИНТЕРФЕЙСОВ В ТЕКУЩЕМ КОМПОНЕНТЕ
+//	// Найти все интерфейсы одного компонента, сформировать множество из них и записать в .._found_interfaces.
+//	_-> .._search_component_interfaces
+//	(*
+//		<-_ searchSetStr5;;
+//
+//		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._component;;
+//		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_component_to_interface;;
+//		_-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._interface;;
+//		_-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_component_to_interface;;
+//		_-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_exposes_interface;;
+//	
+//		_-> rrel_set_3:: rrel_assign:: rrel_scp_var:: .._found_interfaces;;
+//
+//		// Если интерфейсы найдены, то перейти к выбору интерфейса.
+//		_=> nrel_then:: .._get_next_interface;;
+//		// Если интерфесы не найдены, то перейти к выбору следующего компонента.
+//		_=> nrel_else:: .._get_next_component;;
+//	*);;
+
+
+	// ШАГ 7: ВЫБРАТЬ ИНТЕРФЕЙС ИЗ МНОЖЕСТВА НАЙДЕННЫХ ИНТЕРФЕЙСОВ
+	// Найти любой интерфейс во множестве найденных интерфейсов, являющегося значением переменной .._found_interfaces.
+	_-> .._get_next_interface
+	(*
+		<-_ searchElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._found_interfaces;;
+		_-> rrel_2:: rrel_assign:: rrel_const_perm_pos_arc:: rrel_scp_var:: .._arc_from_interface_set_to_interface;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: .._interface;;
+		
+		// Если интерфейсы еще остались, то перейти к удалению выбранного интерфейса из множества.
+		_=> nrel_then:: .._pop_interface_from_set;;
+		// Если все интерфейсы были пройдены, то перейти к печати в терминал, что все интерфейсы были пройдены.
+		_=> nrel_else:: .._print_that_all_interfaces_were_iterated;;
+	*);;
+
+	// ШАГ 8: УДАЛИТЬ ВЫБРАННЫЙ ИНТЕРФЕЙС ИЗ МНОЖЕСТВА НАЙДЕННЫХ ИНТЕРФЕЙСОВ
+	// Удалить sc-дугу между множеством в .._found_interfaces и выбранным интерфейсом.
+	_-> .._pop_interface_from_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._arc_from_interface_set_to_interface;;
+
+		// Перейти к печати в терминал, что интерфейс успешно извлечен из множества.
+		_=> nrel_goto:: .._print_that_component_interface_was_found;;
+	*);;
+
+	// Напечатать в терминал, что студент успешно извлечен из множества.
+	_-> .._print_that_component_interface_was_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Interface was found in specified component];;
+
+		// Перейти к поиску количества ежедневных вызовов.
+		_=> nrel_goto:: .._search_interface_number_of_daily_call;;
+	*);;
+//                                                                                  ################################
+	// ШАГ 9: ПОЛУЧИТЬ ЧИСЛО ЕЖЕДНЕВНЫХ ВЫЗОВОВ ИНТЕРФЕЙСА                          ################################
+	// Найти связку отношения nrel_interface_call_in_day для текущего интерфейса.   ################################
+	_-> .._search_interface_number_of_daily_call
+	(*
+		<-_ searchElStr5;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._interface;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_common_arc:: .._arc_from_interface_to_number_of_call;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: rrel_node_link:: .._number_of_call;;
+		_-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_interface_to_number_of_call;;
+		_-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_interface_call_in_day;;
+
+		// Если число вызовов найдено, то перейти к печати в терминал, что число вызовов найдено.
+		_=> nrel_then:: .._print_that_number_of_call_is_found;;
+		// Если число вызовов не найдено, то перейти к печати в терминал, что число вызовов не найдено.
+		_=> nrel_else:: .._print_that_number_of_call_is_not_found;;
+	*);;
+
+	// Напечатать в терминал, что число вызовов найдено.
+	_-> .._print_that_number_of_call_is_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Number of daily call is found for specified interface];;
+
+		// Перейти к проверке значения числа вызовов.
+		_=> nrel_goto:: .._check_interface_number_of_call;;
+	*);;
+
+	// ШАГ 10: ПРОВЕРКА ЗНАЧЕНИЯ ЧИСЛА ВЫЗОВОВ
+	// Проверить, что число вызовов интерфейсы < 2000.
+	_-> .._check_interface_number_of_call
+	(*
+		<-_ ifGr;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._number_of_call;;
+		_-> rrel_2:: rrel_fixed:: rrel_scp_const:: [2000];;
+
+		// Перейти к проверке принадлежности интерфейса к классу concept_interface.
+		_=> nrel_then:: .._get_next_interface;;
+		// Перейти к выбору следующего интерфейса.
+		_=> nrel_else:: .._check_interface_class;;
+	*);;
+
+	// ШАГ 11: ПРОВЕРКА ПРИНАДЛЕЖНОСТИ К КЛАССУ ИНТЕРФЕЙСОВ
+	// Проверить, что интерфейс принадлежит классу concept_interface.
+	// Если интерфейс принадлежит классу concept_interface, то добавить sc-дугу базового вида между ними
+	// в результирующее множество.
+	_-> .._check_interface_class
+	(*
+		<-_ searchSetStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_interface;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_class_to_interface;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._interface;;
+
+		_-> rrel_set_2:: rrel_fixed:: rrel_scp_var:: .._result_interfaces;;
+
+		// Перейти к добавлению интерфейса в результирующее множество.
+		_=> nrel_goto:: .._add_interface_to_result_interfaces_set;;
+	*);;
+
+	// ШАГ 12: ДОБАВИТЬ ИНТЕРФЕЙС В РЕЗУЛЬТИРУЮЩЕЕ МНОЖЕСТВО
+	// Создать sc-дугу базового вида от структуры в .._result_interfaces к текущему интерфейсу.
+	_-> .._add_interface_to_result_interfaces_set
+	(*
+		<-_ genElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_interfaces;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_interfaces_set_to_interface;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._interface;;
+
+		// Перейти к печати в терминал, что интерфейс успешно добавлен в результат.
+		_=> nrel_goto:: .._print_that_interface_was_added_to_result_interfaces_set;;
+	*);;
+
+	// Напечатать в терминал, что интерфейс успешно добавлен в результат.
+	_-> .._print_that_interface_was_added_to_result_interfaces_set
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Interface was added to result interfaces set];;
+
+		// Перейти к выбору следующего интерфейса.
+		_=> nrel_goto:: .._get_next_interface;;
+	*);;
+
+	// Напечатать в терминал, что число ежедневных вызовов не найдено.
+	_-> .._print_that_number_of_call_is_not_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Number of daily call is not found for specified interface];;
+
+		// Перейти к выбору следующего интерфейса.
+		_=> nrel_goto:: .._get_next_interface;;
+	*);;
+
+	// Напечатать в терминал, что все интерфейсы компонента были обработаны.
+	_-> .._print_that_all_interfaces_were_iterated
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [All interfaces were iterated in specified component];;
+
+		// Перейти к удалению временного множества интерфейсов.
+		_=> nrel_goto:: .._erase_found_interfaces_set;;
+	*);;
+
+	// Удалить временное множество интерфейсов.
+	_-> .._erase_found_interfaces_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._found_interfaces;;
+
+		// Перейти к выбору следующего компонента.
+		_=> nrel_goto:: .._get_next_component;;
+	*);;
+
+	// Напечатать в терминал, что все компоненты в слое были обработаны.
+	_-> .._print_that_all_components_were_iterated
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [All components were iterated in specified layer];;
+
+		// Перейти к удалению временного множества компонентов.
+		_=> nrel_goto:: .._erase_found_components_set;;
+	*);;
+
+	// Удалить временное множество компонентов.
+	_-> .._erase_found_components_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._found_components;;
+
+		// Перейти к завершению программы.
+		_=> nrel_goto:: .._return_result;;
+	*);;
+
+	// Напечатать в терминал, что указанный аргумент не является слоем.
+	_-> .._print_that_specified_argument_is_not_layer
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is not layer];;
+
+		// Перейти к завершению программы.
+		_=> nrel_goto:: .._return_result;;
+	*);;
+
+	// Завершить программу.
+	_-> .._return_result
+	(*
+		<-_ return;;
+	*);;
+*);;
+*];;

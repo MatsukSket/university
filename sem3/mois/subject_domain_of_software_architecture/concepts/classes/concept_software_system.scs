@@ -1,0 +1,9 @@
+concept_software_system
+<- sc_node_class;
+=> nrel_main_idtf:
+    [программная система]
+    (*
+        <- lang_ru;;
+    *);
+<= nrel_inclusion:
+    concept_system;;

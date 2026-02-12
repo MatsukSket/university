@@ -1,0 +1,119 @@
+WebPublicAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API веб интерфейса для пользователя]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [5000];;
+
+WebAdminAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API веб интерфейса для администратора]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [67];;
+
+MobileAppPublicAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API мобильного интерфейса для пользователя]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [8000];;
+
+MobileAppAdminAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API мобильного интерфейса для администратора]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [42];;
+
+OrderProcessingAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API обработки заказов]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [1200];;
+
+ProductCatalogAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API каталога товаров]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [15000];;
+
+DataStorageAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API хранилища данных]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [25000];;
+
+SearchAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API поиска по каталогу]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [9000];;
+
+LogginingAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API входа в систему]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [1800];;
+
+AuthorisationAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API авторизации]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [2000];;
+
+PaymentAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API проведения оплаты]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [500];;
+
+CacheAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API кэширования]
+    (*
+        <- lang_ru;;
+    *);
+=> nrel_interface_call_in_day:
+    [50000];;

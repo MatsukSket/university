@@ -1,0 +1,49 @@
+sc_agent_for_searching_rarely_called_interfaces
+=> nrel_main_idtf:
+	[sc-агент поиска интерфесов заданного слоя, которые имеют малое (<2000) число ежедневных вызовов]
+    (*
+        <- lang_ru;;
+    *);
+	[sc-agent for searching interfaces of specified layer with small number (<2000) of daily calls]
+    (* 
+        <- lang_en;;
+    *);
+<- abstract_sc_agent;
+=> nrel_primary_initiation_condition: 
+	(sc_event_after_generate_outgoing_arc => action_initiated);
+=> nrel_initiation_condition_and_result: 
+	(..sc_agent_for_searching_rarely_called_interfaces_condition => ..sc_agent_for_searching_rarely_called_interfaces_result);
+=> nrel_sc_agent_action_class:
+	action_search_rarely_called_interfaces;
+<= nrel_sc_agent_key_sc_elements: 
+{
+	action_initiated;
+	action_search_rarely_called_interfaces
+};
+=> nrel_inclusion: 
+	.platform_independent_implementation_of_sc_agent_for_searching_rarely_called_interfaces
+	(*
+		<- platform_independent_abstract_sc_agent;;
+		<= nrel_sc_agent_program: 
+		{
+			agent_program_for_searching_rarely_called_interfaces            ;
+			program_for_searching_rarely_called_interfaces
+		};;
+
+		-> scp_agent_for_searching_rarely_called_interfaces
+		(*
+			<- active_sc_agent;;
+		*);;  
+	*);;
+
+..sc_agent_for_searching_rarely_called_interfaces_condition
+= [*
+	action_search_rarely_called_interfaces _-> .._action;;
+	action_initiated _-> .._action;;
+	.._action _-> rrel_1:: .._layer;;
+*];;
+
+..sc_agent_for_searching_rarely_called_interfaces_result
+= [*
+	concept_interface _-> .._interface;;
+*];;

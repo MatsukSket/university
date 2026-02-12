@@ -1,0 +1,24 @@
+@search_layers_in_system_template = {
+    rrel_init_template: {
+        rrel_template: [*
+            @input_param1 = (.._software_system <- concept_software_system);;
+            rrel_layer _-> (.._software_system _-> .._layer);;
+            @output_param1 = (.._layer <-_ concept_layer);;
+        *];
+        rrel_template_input_params: { 
+            @input_param1
+        };
+        rrel_template_output_params: { 
+            @output_param1
+        }
+    } (* <- nrel_search_template;; *)
+};;
+
+@search_layers_in_system_template
+<- nrel_fixed_search_strategy_template;
+=> nrel_main_idtf:
+    [Шаблон поиска слоев системы]
+    (*
+        <- lang_ru;;
+    *);;
+
