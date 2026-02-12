@@ -1,0 +1,19 @@
+WebUI
+<- concept_component;
+=> nrel_exposes_interface:
+    REST_API;;
+
+OrderService
+<- concept_component;
+=> nrel_exposes_interface:
+    OrderProcessingAPI;;
+
+CatalogService
+<- concept_component;
+=> nrel_exposes_interface:
+    ProductCatalogAPI;;
+
+DatabaseAdapter
+<- concept_component;
+=> nrel_exposes_interface:
+    DataStorageAPI;;

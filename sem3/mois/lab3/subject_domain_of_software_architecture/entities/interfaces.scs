@@ -1,0 +1,31 @@
+REST_API
+<- concept_interface;
+=> nrel_main_idtf:
+    [REST API]
+    (*
+        <- lang_ru;;
+    *);;
+
+OrderProcessingAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API обработки заказов]
+    (*
+        <- lang_ru;;
+    *);;
+
+ProductCatalogAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API каталога товаров]
+    (*
+        <- lang_ru;;
+    *);;
+
+DataStorageAPI
+<- concept_interface;
+=> nrel_main_idtf:
+    [API хранилища данных]
+    (*
+        <- lang_ru;;
+    *);;

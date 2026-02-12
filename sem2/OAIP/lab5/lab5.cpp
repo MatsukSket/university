@@ -75,4 +75,8 @@ int main()
 
 // cd C:\Users\User\Desktop\university\sem2\OAIP\lab5
 // g++ lab5.cpp -o lab5 Tree.cpp
+<<<<<<< HEAD
 // ./lab5.exe
+=======
+// ./lab5.exe
+>>>>>>> 32870f7 (linux after pull)

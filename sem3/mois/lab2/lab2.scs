@@ -1,40 +1,40 @@
 subject_domain_software_architecture
 => nrel_main_idtf:
-   [Архитектура программных систем]
-   (*
-      <- lang_ru;;
-   *);
+    [Архитектура программных систем]
+    (*
+       <- lang_ru;;
+    *);
 <- concept_subject_domain;
 => nrel_ontology:
-   structural_specification_of_software_architecture;
-   set_theoretic_ontology_of_software_architecture;;
+    structural_specification_of_software_architecture;
+    set_theoretic_ontology_of_software_architecture;;
 
 structural_specification_of_software_architecture = [*   
 <- concept_structural_specification_of_subject_domain;;
 
 subject_domain_of_software_architecture = [*
 -> rrel_maximum_studied_object_class:
-   concept_software_system;
+     concept_software_system;
 
 -> rrel_not_maximum_studied_object_class:
-   concept_component;
-   concept_module;
-   concept_interface;
-   concept_service;
-   concept_subsystem;
-   concept_layer;
+    concept_component;
+    concept_module;
+    concept_interface;
+    concept_service;
+    concept_subsystem;
+    concept_layer;
 
 -> rrel_explored_relation:
-   nrel_decomposes_into;
-   nrel_implements;
-   nrel_depends_on;
-   nrel_exposes_interface;
-   nrel_belongs_to_layer;
-   nrel_communicates_with;
+    nrel_decomposes_into;
+    nrel_implements;
+    nrel_depends_on;
+    nrel_exposes_interface;
+    nrel_belongs_to_layer;
+    nrel_communicates_with;
 
 => nrel_child_subject_domain:
-   subject_domain_microservices_architecture;
-   subject_domain_client_server_architecture;;
+    subject_domain_microservices_architecture;
+    subject_domain_client_server_architecture;;
 *];;
 
 set_theoretic_ontology_of_software_architecture = [*
@@ -42,45 +42,45 @@ set_theoretic_ontology_of_software_architecture = [*
 
 concept_software_system		// декомпозиция
 => nrel_decomposition: {
-   concept_subsystem;
-   concept_component
+    concept_subsystem;
+    concept_component
 };;
 
 concept_component		// компоненты подразделяются на модули и сервисы
 => nrel_subdividing: {
-   concept_module;
-   concept_service
+    concept_module;
+    concept_service
 };;
 
 concept_software_system		// слои архитектуры 
 => nrel_inclusion:
-   concept_layer;;
+    concept_layer;;
 
 concept_component		// компонент предоставляет интерфейс
 => nrel_exposes_interface:
-   concept_interface;;
+    concept_interface;;
 
 nrel_component_relation		// отношения между компонентами
 => nrel_subdividing: {
-   nrel_depends_on;
-   nrel_communicates_with
+    nrel_depends_on;
+    nrel_communicates_with
 };;
 
 nrel_implements			// реализация предоставления интерфейса
 => nrel_inclusion:
-   nrel_exposes_interface;;
+    nrel_exposes_interface;;
 
 concept_layer			// слои содержат компоненты
 => nrel_contains:
-   concept_component;;
+    concept_component;;
 *];;
 
 OnlineStoreSystem
 <- concept_software_system;
 => nrel_entity_decomposition: {
-   FrontendComponent;
-   BackendComponent;
-   DatabaseSubsystem
+    FrontendComponent;
+    BackendComponent;
+    DatabaseSubsystem
 };;
 
 FrontendComponent
