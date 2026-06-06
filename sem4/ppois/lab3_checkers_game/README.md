@@ -1,4 +1,4 @@
-# Шашки (Checkers) — Python & Pygame
+# Шашки (Checkers)
 
 Игра в шашки, написанная на Python с использованием библиотеки Pygame. 
 
@@ -42,3 +42,4 @@ checkers_project/
 │
 ├── main.py
 └── README.md
+```
