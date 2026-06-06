@@ -1,0 +1,70 @@
+!table
+!version 300
+!charset WindowsLatin1
+
+Definition Table
+  Type DBF Charset "WindowsLatin1"
+  Fields 8
+    Lname Char (20) ;
+    Fname Char (15) ;
+    Terr Char (1) ;
+    Company Char (40) ;
+    City Char (20) ;
+    State Char (2) ;
+    Zip Char (5) ;
+    Order_amt Decimal (7, 0) ;
+ReadOnly
+begin_metadata
+"\IsReadOnly" = "FALSE"
+"\Identification" = ""
+"\Identification\Use Constraints" = "For use with MapInfo Professional"
+"\Identification\Access Constraints" = "Licensed Users"
+"\Identification\Domain" = ""
+"\Identification\Domain\Bounds" = ""
+"\Identification\Domain\Bounds\West" = "-174.43"
+"\Identification\Domain\Bounds\East" = "-71.026"
+"\Identification\Domain\Bounds\North" = "61.15"
+"\Identification\Domain\Bounds\South" = "21.4447"
+"\Identification\Citation" = "MapInfo Professional Bundled Maps; United States Customers (Geocoded)"
+"\Identification\Description" = ""
+"\Identification\Description\Abstract" = "Sample Customer data base in .DBF format that has been geocoded in MapInfo"
+"\Identification\Time Period" = ""
+"\Identification\Time Period\Currentness" = "na"
+"\Identification\Keywords" = ""
+"\Identification\Keywords\Theme" = ""
+"\Identification\Keywords\Theme\Geography" = ""
+"\Identification\Keywords\Theme\Geography\Abbreviation" = ""
+"\Identification\Keywords\Theme\Content" = ""
+"\Identification\Keywords\Place" = ""
+"\Identification\Keywords\Place\Layers" = ""
+"\Identification\Keywords\Place\Layers\Count" = "0"
+"\Spatial Reference" = ""
+"\Spatial Reference\Geographic" = ""
+"\Spatial Reference\Geographic\Projection" = ""
+"\Spatial Reference\Geographic\Projection\Clause" = "CoordSys Earth Projection 1, 0"
+"\Spatial Reference\Geographic\Projection\Name" = "Longitude / Latitude"
+"\Spatial Reference\Geographic\Coordinate Units" = ""
+"\Spatial Reference\Geodetic" = ""
+"\Spatial Reference\Geodetic\Datum" = ""
+"\Spatial Reference\Geodetic\Ellipsoid" = ""
+"\Spatial Organization" = ""
+"\Spatial Organization\Object" = ""
+"\Spatial Organization\Object\Type1" = "Regions"
+"\Spatial Organization\Object\Type1\Count" = "0"
+"\Spatial Organization\Object\Type2" = "Points"
+"\Spatial Organization\Object\Type2\Count" = "250"
+"\Spatial Organization\Object\Type3" = "Polylines"
+"\Spatial Organization\Object\Type3\Count" = "0"
+"\Spatial Organization\Object\Type4" = "Lines"
+"\Spatial Organization\Object\Type4\Count" = "0"
+"\Spatial Organization\Object\All" = ""
+"\Spatial Organization\Object\All\TotalCount" = "250"
+"\Spatial Organization\Method" = ""
+"\Spatial Organization\Method\Type" = ""
+"\Quality" = ""
+"\Quality\Lineage" = ""
+"\Quality\Lineage\Source" = ""
+"\Quality\Lineage\Source\Vintage" = "na"
+"\Quality\Lineage\Source\Scale" = "na"
+"\Quality\Lineage\Source\Citation" = "MapInfo"
+end_metadata

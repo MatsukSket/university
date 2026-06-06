@@ -1,0 +1,64 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+class ScheduleUI {
+  - controller: ScheduleController
+  + requestAvailableFunctions(): List<String>
+  + displayForm(): void
+  + submitSchedule(time: String, days: String, action: String, deviceId: String): void
+  + showSuccessMessage(): void
+  + showConflictError(): void
+}
+
+class ScheduleController {
+  - db: DatabaseManager
+  - timer: SystemTimer
+  - devices: List<SmartDevice>
+  + getAvailableFunctions(): List<String>
+  + processNewSchedule(time: String, days: String, action: String, deviceId: String): boolean
+  - validateAndCheckConflicts(task: ScheduleTask): boolean
+  + onTimerTick(currentTime: String): void
+  - executeTask(task: ScheduleTask): void
+}
+
+class ScheduleTask {
+  - id: String
+  - time: String
+  - days: String
+  - action: String
+  - deviceId: String
+}
+
+class DatabaseManager {
+  + saveRecord(task: ScheduleTask): boolean
+  + getActiveTasks(currentTime: String): List<ScheduleTask>
+  + logEvent(message: String): void
+}
+
+class SystemTimer {
+  - currentTime: String
+  - interval: int
+  + start(): void
+  + stop(): void
+  - tick(): void
+}
+
+class SmartDevice {
+  - id: String
+  - type: String <<свет/климат/розетка>>
+  - state: String
+  + executeCommand(action: String): boolean
+  - changeState(newState: String): void
+}
+
+' Отношения между классами
+ScheduleUI --> ScheduleController : Передает параметры
+ScheduleController --> DatabaseManager : Сохраняет расписание\nи читает задачи
+ScheduleController "1" --> "*" SmartDevice : Отправляет команды
+SystemTimer --> ScheduleController : Сигнал каждую минуту
+DatabaseManager ..> ScheduleTask : Хранит объекты задач
+ScheduleController ..> ScheduleTask : Обрабатывает логику
+
+@enduml

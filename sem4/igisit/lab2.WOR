@@ -1,0 +1,202 @@
+!Workspace
+!Version  950
+!Charset WindowsCyrillic
+Open Table "C:\Users\User\Desktop\USA\USA\STATES" As STATES Interactive
+Select *  from STATES  where State_Name = "Washington"  
+Select *  from STATES  where State_Name = "Washington"  
+Map From STATES
+  Position (1.70833,3.375) Units "in"
+  Width 7.46875 Units "in" Height 2.96875 Units "in" 
+Set Window FrontWindow() ScrollBars Off Autoscroll On Enhanced On Smooth Text Antialias Image High
+Set Map
+  CoordSys Earth Projection 1, 62
+  Center (-94.66634926,34.99340126)
+  Zoom 8427.266125 Units "km"
+  Preserve Zoom Display Zoom
+  Distance Units "km" Area Units "sq km" XY Units "degree"
+shade 1 with Pop_Urban/Pop_1990 ranges apply all use color Brush (2,16711680,16777215) 
+  0.321: 0.546 Brush (2,16765136,16777215) Pen (1,2,0) ,
+  0.546: 0.675 Brush (2,16752800,16777215) Pen (1,2,0) ,
+  0.675: 0.73 Brush (2,16740464,16777215) Pen (1,2,0) ,
+  0.73: 0.846 Brush (2,16724016,16777215) Pen (1,2,0) ,
+  0.846: 1 Brush (2,16711680,16777215) Pen (1,2,0) 
+  default Brush (2,16777215,16777215) Pen (1,2,0) 
+  # use 1 round 0.001 inflect off Brush (2,16776960,16777215) at 3 by 0 color 1 # 
+shade 2 with Pop_Male,Pop_Female pie Angle 180 
+  Max Size 0.496597 Units "cm" At Value 3e+07 vary size by "SQRT" 
+  border Pen (1,2,0)  position center center 
+  style 
+    Brush (2,65535,16777215) ,
+    Brush (2,16711935,16777215) 
+  # max 30000000 color 0 # 
+Set Map
+  Layer 1
+    Display Off
+    Global Pen (1,2,0)  Brush (2,16777215,16777215)  Symbol (35,0,12)  Line (1,2,0)  Font ("Tahoma",0,9,0)
+    Selectable Off
+  Layer 2
+    Display Off
+    Global Pen (1,2,0)  Brush (2,16777215,16777215)  Symbol (35,0,12)  Line (1,2,0)  Font ("Tahoma",0,9,0)
+    Selectable Off
+  Layer 3
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line None Position Center Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With State_Name
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+set legend 
+  layer 1 
+    display on 
+    shades on 
+    symbols off 
+    lines off 
+    count off 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on  
+set legend 
+  layer 2 
+    display on 
+    shades on 
+    symbols off 
+    lines off 
+    count on 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending off 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+Set Window FrontWindow() Printer
+ Name "Samsung ML-1520 (USB002)" Orientation Portrait Copies 1
+ Papersize 9
+Create Redistricter STATES By State_Name With Count, Brush, Sum(Pop_Rural)
+    Layer 3 
+  Position (0.916667,2.85417) Units "in"
+  Width 9.98958 Units "in" Height 4.46875 Units "in" 
+set shade 2 values 
+  "Alabama" Brush (2,65280,16777215) Pen (1,2,0) Line (1,2,65280) Symbol (34,65280,12) ,
+  "Alaska" Brush (2,16711680,16777215) Pen (1,2,0) Line (1,2,16711680) Symbol (34,16711680,12) ,
+  "Arizona" Brush (2,16711935,16777215) Pen (1,2,0) Line (1,2,16711935) Symbol (34,16711935,12) ,
+  "Arkansas" Brush (2,255,16777215) Pen (1,2,0) Line (1,2,255) Symbol (34,255,12) ,
+  "California" Brush (2,16776960,16777215) Pen (1,2,0) Line (1,2,16776960) Symbol (34,16776960,12) ,
+  "Colorado" Brush (2,65535,16777215) Pen (1,2,0) Line (1,2,65535) Symbol (34,65535,12) ,
+  "Connecticut" Brush (2,8388608,16777215) Pen (1,2,0) Line (1,2,8388608) Symbol (34,8388608,12) ,
+  "Delaware" Brush (2,128,16777215) Pen (1,2,0) Line (1,2,128) Symbol (34,128,12) ,
+  "District of Columbia" Brush (2,32768,16777215) Pen (1,2,0) Line (1,2,32768) Symbol (34,32768,12) ,
+  "Florida" Brush (2,8388736,16777215) Pen (1,2,0) Line (1,2,8388736) Symbol (34,8388736,12) ,
+  "Georgia" Brush (2,8421376,16777215) Pen (1,2,0) Line (1,2,8421376) Symbol (34,8421376,12) ,
+  "Hawaii" Brush (2,32896,16777215) Pen (1,2,0) Line (1,2,32896) Symbol (34,32896,12) ,
+  "Idaho" Brush (2,8454016,16777215) Pen (1,2,0) Line (1,2,8454016) Symbol (34,8454016,12) ,
+  "Illinois" Brush (2,8421631,16777215) Pen (1,2,0) Line (1,2,8421631) Symbol (34,8421631,12) ,
+  "Indiana" Brush (2,16744703,16777215) Pen (1,2,0) Line (1,2,16744703) Symbol (34,16744703,12) ,
+  "Iowa" Brush (2,16744576,16777215) Pen (1,2,0) Line (1,2,16744576) Symbol (34,16744576,12) ,
+  "Kansas" Brush (2,16777088,16777215) Pen (1,2,0) Line (1,2,16777088) Symbol (34,16777088,12) ,
+  "Kentucky" Brush (2,8454143,16777215) Pen (1,2,0) Line (1,2,8454143) Symbol (34,8454143,12) ,
+  "Louisiana" Brush (2,8405056,16777215) Pen (1,2,0) Line (1,2,8405056) Symbol (34,8405056,12) ,
+  "Maine" Brush (2,8405120,16777215) Pen (1,2,0) Line (1,2,8405120) Symbol (34,8405120,12) ,
+  "Maryland" Brush (2,4210816,16777215) Pen (1,2,0) Line (1,2,4210816) Symbol (34,4210816,12) ,
+  "Massachusetts" Brush (2,4227136,16777215) Pen (1,2,0) Line (1,2,4227136) Symbol (34,4227136,12) ,
+  "Michigan" Brush (2,8421440,16777215) Pen (1,2,0) Line (1,2,8421440) Symbol (34,8421440,12) ,
+  "Minnesota" Brush (2,4227200,16777215) Pen (1,2,0) Line (1,2,4227200) Symbol (34,4227200,12) ,
+  "Mississippi" Brush (2,12648384,16777215) Pen (1,2,0) Line (1,2,12648384) Symbol (34,12648384,12) ,
+  "Missouri" Brush (2,16761024,16777215) Pen (1,2,0) Line (1,2,16761024) Symbol (34,16761024,12) ,
+  "Montana" Brush (2,12632319,16777215) Pen (1,2,0) Line (1,2,12632319) Symbol (34,12632319,12) ,
+  "Nebraska" Brush (2,12648447,16777215) Pen (1,2,0) Line (1,2,12648447) Symbol (34,12648447,12) ,
+  "Nevada" Brush (2,8413312,16777215) Pen (1,2,0) Line (1,2,8413312) Symbol (34,8413312,12) ,
+  "New Hampshire" Brush (2,8413280,16777215) Pen (1,2,0) Line (1,2,8413280) Symbol (34,8413280,12) ,
+  "New Jersey" Brush (2,6324320,16777215) Pen (1,2,0) Line (1,2,6324320) Symbol (34,6324320,12) ,
+  "New Mexico" Brush (2,6316160,16777215) Pen (1,2,0) Line (1,2,6316160) Symbol (34,6316160,12) ,
+  "New York" Brush (2,8421472,16777215) Pen (1,2,0) Line (1,2,8421472) Symbol (34,8421472,12) ,
+  "North Carolina" Brush (2,16761087,16777215) Pen (1,2,0) Line (1,2,16761087) Symbol (34,16761087,12) ,
+  "North Dakota" Brush (2,16777152,16777215) Pen (1,2,0) Line (1,2,16777152) Symbol (34,16777152,12) ,
+  "Ohio" Brush (2,6324352,16777215) Pen (1,2,0) Line (1,2,6324352) Symbol (34,6324352,12) ,
+  "Oklahoma" Brush (2,16711680,16777215) Pen (1,2,0) Line (1,2,16711680) Symbol (34,16711680,12) ,
+  "Oregon" Brush (2,65280,16777215) Pen (1,2,0) Line (1,2,65280) Symbol (34,65280,12) ,
+  "Pennsylvania" Brush (2,255,16777215) Pen (1,2,0) Line (1,2,255) Symbol (34,255,12) ,
+  "Rhode Island" Brush (2,16711935,16777215) Pen (1,2,0) Line (1,2,16711935) Symbol (34,16711935,12) ,
+  "South Carolina" Brush (2,16776960,16777215) Pen (1,2,0) Line (1,2,16776960) Symbol (34,16776960,12) ,
+  "South Dakota" Brush (2,65535,16777215) Pen (1,2,0) Line (1,2,65535) Symbol (34,65535,12) ,
+  "Tennessee" Brush (2,8388608,16777215) Pen (1,2,0) Line (1,2,8388608) Symbol (34,8388608,12) ,
+  "Texas" Brush (2,32768,16777215) Pen (1,2,0) Line (1,2,32768) Symbol (34,32768,12) ,
+  "Utah" Brush (2,128,16777215) Pen (1,2,0) Line (1,2,128) Symbol (34,128,12) ,
+  "Vermont" Brush (2,8421376,16777215) Pen (1,2,0) Line (1,2,8421376) Symbol (34,8421376,12) ,
+  "Virginia" Brush (2,8388736,16777215) Pen (1,2,0) Line (1,2,8388736) Symbol (34,8388736,12) ,
+  "Washington" Brush (2,8421631,16777215) Pen (1,2,0) Line (1,2,8421631) Symbol (34,8421631,12) ,
+  "West Virginia" Brush (2,16744576,16777215) Pen (1,2,0) Line (1,2,16744576) Symbol (34,16744576,12) ,
+  "Wisconsin" Brush (2,32896,16777215) Pen (1,2,0) Line (1,2,32896) Symbol (34,32896,12) ,
+  "Wyoming" Brush (2,8454016,16777215) Pen (1,2,0) Line (1,2,8454016) Symbol (34,8454016,12) 
+  default Brush (2,16777215,16777215) Pen (1,2,0) Line (1,2,16777215) Symbol (40,16777215,12) 
+set legend 
+  layer prev 
+    display on 
+    shades on 
+    symbols off 
+    lines off 
+    count off 
+    title auto Font ("Tahoma",0,9,0)
+    subtitle auto Font ("Tahoma",0,8,0)
+    ascending on 
+    ranges Font ("Tahoma",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+

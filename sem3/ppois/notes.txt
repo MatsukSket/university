@@ -1,0 +1,13 @@
+!!!! изучить тесты, переделать main.cpp
+
+cd build
+cmake ..
+make
+
+/ красивое покрытие
+make coverage                       
+xdg-open coverage_report/index.html  
+
+/ покрытие в терминале
+make tcoverage
+

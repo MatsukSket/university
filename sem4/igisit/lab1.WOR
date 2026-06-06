@@ -1,0 +1,52 @@
+!Workspace
+!Version 1103
+!Charset WindowsCyrillic
+Open Table "USA\USA\STATES" As STATES Interactive
+Open Table "USA\USA\US_HIWAY" As US_HIWAY Interactive
+Select *  from STATES  where Pop_Urban > ( Pop_Rural * 2 )  into task_a noselect  
+Select STATES . State_Name  from STATES , US_HIWAY  where STATES . obj intersects US_HIWAY . obj and US_HIWAY . Highway = "I 70"  into task_b noselect  order by STATES . State_Name  
+Select STATES . State_Name  from STATES , US_HIWAY  where STATES . obj intersects US_HIWAY . obj and US_HIWAY . Highway = "I 70"  into Query1 order by STATES . State_Name  
+Map From US_HIWAY,STATES
+  Position (10,6.03125) Units "in"
+  Width 7.46875 Units "in" Height 4.29167 Units "in" 
+Set Window FrontWindow() ScrollBars Off Autoscroll On Enhanced On Smooth Text Antialias Image High
+Set Map
+  CoordSys Earth Projection 1, 62
+  Center (-97.22557463,33.76643177)
+  Zoom 9272.524426 Units "km"
+  Preserve Zoom Display Zoom
+  Distance Units "km" Area Units "sq km" XY Units "degree"
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line Arrow Position Above Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With Highway
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+   Object 171 Anchor (-99.710328,38.980362) Callout (-99.710328,38.980362) Angle 357.3 
+  Layer 2
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line None Position Center Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With State_Name
+      Parallel On Auto On Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Window FrontWindow() Printer
+ Name "Samsung ML-1520 (USB002)" Orientation Portrait Copies 1
+ Papersize 9
+Browse * From task_a
+  Position (0.260417,2.01042) Units "in"
+  Width 9.98958 Units "in" Height 4.46875 Units "in" 
+set window FrontWindow() Font ("Segoe UI",0,9,0)
+set browse order by 1
+Set Window FrontWindow() Printer
+ Name "Samsung ML-1520 (USB002)" Orientation Portrait Copies 1
+ Papersize 9
+Browse * From task_b
+  Position (0.697917,2.57292) Units "in"
+  Width 9.98958 Units "in" Height 4.46875 Units "in" 
+set window FrontWindow() Font ("Segoe UI",0,9,0)
+Set Window FrontWindow() Printer
+ Name "Samsung ML-1520 (USB002)" Orientation Portrait Copies 1
+ Papersize 9

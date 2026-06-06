@@ -1,0 +1,67 @@
+@startuml
+skinparam maxMessageSize 200
+
+actor "Пользователь" as User
+participant "Интерфейс" as UI
+participant "Контроллер" as Controller
+database "База данных" as DB
+participant "Системный таймер" as Timer
+participant "Умное устройство\n(свет/температура/увлажнение)" as Device
+
+== Установка расписания ==
+
+User -> UI: Выбирает систему и действие
+activate UI
+UI -> Controller: Запрос доступных функций
+Controller --> UI: Список функций
+UI -->> User: Отображает форму
+
+User ->> UI: Вводит параметры (время, дни недели, действие)
+User -> UI: Нажимает "сохранить"
+
+UI -> Controller: Передает данные расписания
+activate Controller
+Controller -> Controller: Валидация и проверка конфликтов
+
+alt Ошибок нет
+    Controller -> DB: Сохранить запись (id, время, дата, действие)
+    activate DB
+    DB --> Controller: Подтверждение записи
+    deactivate DB
+    Controller --> UI: Успешное сохранение
+    UI --> User: Уведомление: "расписание установлено"
+else Обнаружен конфликт
+    Controller --> UI: Ошибка
+    UI --> User: Сообщение о конфликте
+end
+deactivate Controller
+deactivate UI
+
+== Выполнение расписания ==
+
+loop Каждую минуту (или по тику таймера)
+    Timer -> Controller: Сигнал. Текущее время
+    activate Controller
+    
+    Controller -> DB: Запрос активных задач на текущее время
+    activate DB
+    DB --> Controller: Список задач (id, действие)
+    deactivate DB
+    
+    alt Если найдены задачи, подходящие под условия (дата/день недели)
+        loop Для каждой задачи в списке
+            Controller -> Device: Отправить команду (вкл / выкл / установить значение)
+            activate Device
+            Device -> Device: Смена состояния
+            Device --> Controller: Подтверждение выполнения
+            deactivate Device
+            
+            Controller -> DB: Записать событие в лог
+        end
+    else Задач на текущий момент нет
+        Controller -> Controller: Ожидание следующего цикла
+    end
+    deactivate Controller
+end
+
+@enduml

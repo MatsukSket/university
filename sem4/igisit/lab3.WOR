@@ -1,0 +1,94 @@
+!Workspace
+!Version  950
+!Charset WindowsCyrillic
+Open Table "USA\STATES" As STATES Interactive
+Open Table "USA\US_HIWAY" As US_HIWAY Interactive
+Open Table "USA\CITY_125" As CITY_125 Interactive
+Open Table "C:\Users\User\Documents\Concentric_Buffer" As Concentric_Buffer Interactive
+Map From CITY_125,US_HIWAY,Concentric_Buffer,STATES
+  Position (0.0416667,1.72917) Units "in"
+  Width 9.98958 Units "in" Height 4.46875 Units "in" 
+Set Window FrontWindow() ScrollBars Off Autoscroll On Enhanced On Smooth Text Antialias Image High
+Set Map
+  CoordSys Earth Projection 1, 62
+  Center (-115.4638451,35.93060875)
+  Zoom 584.9644081 Units "km"
+  Preserve Zoom Display Zoom
+  Distance Units "km" Area Units "sq km" XY Units "degree"
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line Arrow Position Right Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With City
+      Parallel On Auto On Overlap Off Duplicates On Offset 2
+      Visibility On
+   Object 29 Line Line Arrow Anchor (-84.197357,39.779067) Angle 30 
+   Object 50 Line Line Arrow Anchor (-86.145999,39.7777) Angle 30 
+   Object 55 Line Line Arrow Anchor (-94.552009,39.122312) Angle 30 
+   Object 108 Line Line Arrow Anchor (-90.244299,38.63605) Angle 30 
+   Object 22 Line Line Arrow Anchor (-84.505957,39.139801) Angle 30 
+   Object 25 Line Line Arrow Anchor (-82.987381,39.988933) Angle 30 
+   Object 122 Line Line Arrow Anchor (-97.342674,37.68735) Angle 30 
+   Object 67 Line Line Arrow Anchor (-90.006991,35.1056) Angle 30 
+   Object 61 Line Line Arrow Anchor (-92.354076,34.7224) Angle 30 
+   Object 83 Line Line Arrow Anchor (-97.513491,35.46705) Angle 30 
+   Object 118 Line Line Arrow Anchor (-95.916407,36.12775) Angle 30 
+   Object 8 Line Line Arrow Anchor (-84.422592,33.7629) Angle 30 
+   Object 26 Line Line Arrow Anchor (-84.874972,32.51071) Angle 30 
+   Object 14 Line Line Arrow Anchor (-86.799223,33.527746) Angle 30 
+   Object 19 Line Line Arrow Anchor (-85.256956,35.066209) Angle 30 
+   Object 49 Line Line Arrow Anchor (-86.627723,34.707048) Angle 30 
+   Object 13 Line Line Arrow Anchor (-91.126043,30.448967) Angle 30 
+   Object 18 Line Line Arrow Anchor (-80.834514,35.19755) Angle 30 
+   Object 52 Line Line Arrow Anchor (-90.207591,32.3205) Angle 30 
+   Object 53 Line Line Arrow Anchor (-81.648509,30.33415) Angle 30 
+   Object 57 Line Line Arrow Anchor (-83.946288,35.97455) Angle 30 
+   Object 69 Line Line Arrow Anchor (-90.177396,29.997601) Angle 30 
+   Object 73 Line Line Arrow Anchor (-88.088959,30.67745) Angle 30 
+   Object 76 Line Line Arrow Anchor (-86.784829,36.17155) Angle 30 
+   Object 6 Line Line Arrow Anchor (-97.12751,32.694501) Angle 30 
+   Object 10 Line Line Arrow Anchor (-97.750522,30.30588) Angle 30 
+   Object 47 Line Line Arrow Anchor (-95.386728,29.7687) Angle 30 
+   Object 59 Line Line Arrow Anchor (-84.45946,38.042746) Angle 30 
+   Object 64 Line Line Arrow Anchor (-85.741156,38.22475) Angle 30 
+   Object 105 Line Line Arrow Anchor (-93.797808,32.47155) Angle 30 
+   Object 44 Line Line Arrow Anchor (-79.826888,36.0789) Angle 30 
+   Object 92 Line Line Arrow Anchor (-78.658753,35.82195) Angle 30 
+   Object 7 Line Line Arrow Anchor (-77.101909,38.878726) Angle 30 
+   Object 12 Line Line Arrow Anchor (-76.610616,39.3008) Angle 30 
+   Object 20 Line Line Arrow Anchor (-76.308771,36.678812) Angle 30 
+   Object 27 Line Line Arrow Anchor (-97.292827,27.705728) Angle 30 
+   Object 34 Line Line Arrow Anchor (-80.139499,26.14255) Angle 30 
+   Object 45 Line Line Arrow Anchor (-80.296772,25.86175) Angle 30 
+   Object 80 Line Line Arrow Anchor (-76.51416,37.07585) Angle 30 
+   Object 85 Line Line Arrow Anchor (-81.374248,28.504748) Angle 30 
+   Object 93 Line Line Arrow Anchor (-77.474584,37.53105) Angle 30 
+   Object 110 Line Line Arrow Anchor (-82.642121,27.758) Angle 30 
+   Object 87 Line Line Arrow Anchor (-75.134678,40.006817) Angle 30 
+  Layer 2
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line Arrow Position Above Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With Highway
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+   Object 171 Anchor (-100.172882,39.025761) Callout (-100.172882,39.025761) Angle 329.4 
+  Layer 3
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line None Position Center Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With "Ring "+Ring_+":"+" "+Radius_+" "+Dist_Units
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 4
+    Display Graphic
+    Global Pen (1,2,0) Brush (2,16777215,16777215) Symbol (35,0,12) Line (1,2,0) Font ("Tahoma",0,9,0)
+    Label Line None Position Center Font ("Tahoma",0,9,0) Pen (1,2,0) 
+      With State_Name
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Map Layer 0 Editable
+Set Window FrontWindow() Printer
+ Name "Samsung ML-1520 (USB002)" Orientation Portrait Copies 1
+ Papersize 9

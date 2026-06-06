@@ -1,0 +1,12 @@
+.venv
+.idea
+.coverage
+.pytest_cache
+.vscode
+__pycache__
+
+
+*
+!*/
+!*.*
+*.exe
